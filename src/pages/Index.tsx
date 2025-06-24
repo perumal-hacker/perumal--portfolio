@@ -7,6 +7,8 @@ import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
+import LeetCodeSection from '@/components/sections/LeetCodeSection';
+import CertificationsSection from '@/components/sections/CertificationsSection';
 
 const Index = () => {
   return (
@@ -20,8 +22,9 @@ const Index = () => {
           <AboutSection />
           <SkillsSection />
           <ProjectsSection />
-          
-          {/* Placeholder sections - will be implemented in next iteration */}
+          <LeetCodeSection />
+
+          {/* Education Section */}
           <section id="education" className="section-padding">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-4xl font-bold gradient-text mb-8">Education</h2>
@@ -39,25 +42,9 @@ const Index = () => {
             </div>
           </section>
 
-          <section id="certifications" className="section-padding bg-gray-50 dark:bg-gray-900/50">
-            <div className="max-w-7xl mx-auto text-center">
-              <h2 className="text-4xl font-bold gradient-text mb-8">Certifications</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  'Full Stack Web Development - Udemy',
-                  'Data Structures & Algorithms in C - Udemy',
-                  'ChatGPT & Generative AI - Udemy',
-                  'Joy of Computing Using Python - NPTEL',
-                  'Problem Solving Through Programming in C - NPTEL'
-                ].map((cert, index) => (
-                  <div key={index} className="glass glass-dark p-6 rounded-xl">
-                    <p className="text-gray-700 dark:text-gray-300 font-medium">{cert}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <CertificationsSection />
 
+          {/* Achievements Section */}
           <section id="achievements" className="section-padding">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-4xl font-bold gradient-text mb-8">Achievements</h2>
@@ -84,6 +71,7 @@ const Index = () => {
             </div>
           </section>
 
+          {/* Contact Section */}
           <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-900/50">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl font-bold gradient-text mb-8">Get In Touch</h2>
@@ -97,18 +85,22 @@ const Index = () => {
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Contact Info</h3>
                     <div className="space-y-4 text-left">
-                      <p className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                      <a href="mailto:perumal.infonet@gmail.com" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         <span className="w-5 h-5">📧</span>
                         perumal.infonet@gmail.com
-                      </p>
-                      <p className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                      </a>
+                      <a href="https://www.linkedin.com/in/perumal-s-dev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         <span className="w-5 h-5">🔗</span>
-                        LinkedIn: /in/perumal-s-dev
-                      </p>
-                      <p className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                        linkedin.com/in/perumal-s-dev
+                      </a>
+                      <a href="https://github.com/perumal-hacker" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         <span className="w-5 h-5">💻</span>
-                        GitHub: /perumal-hacker
-                      </p>
+                        github.com/perumal-hacker
+                      </a>
+                      <a href="https://leetcode.com/u/perumalhacks/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        <span className="w-5 h-5">⚡</span>
+                        leetcode.com/u/perumalhacks
+                      </a>
                     </div>
                   </div>
                   
@@ -148,7 +140,7 @@ const Index = () => {
         <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-gray-400">
-              © 2024 Perumal S. Built with React, TypeScript, and Tailwind CSS.
+              © 2024 Perumal S. All rights reserved.
             </p>
           </div>
         </footer>
