@@ -7,27 +7,13 @@ const SkillsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
 
   const skillCategories = {
-    'Fullstack Skills': [
+    'Frontend': [
       { 
         name: 'React', 
         icon: '⚛️', 
         level: 90, 
-        achievement: 'Built 5+ Projects',
+        achievement: 'Built 10+ Projects',
         color: 'from-blue-400 to-blue-600'
-      },
-      { 
-        name: 'Node.js', 
-        icon: '💚', 
-        level: 85, 
-        achievement: 'Backend Expert',
-        color: 'from-green-400 to-green-600'
-      },
-      { 
-        name: 'MongoDB', 
-        icon: '🗄️', 
-        level: 80, 
-        achievement: 'Database Architect',
-        color: 'from-green-500 to-green-700'
       },
       { 
         name: 'JavaScript', 
@@ -39,65 +25,104 @@ const SkillsSection: React.FC = () => {
       { 
         name: 'TypeScript', 
         icon: '💙', 
-        level: 85, 
+        level: 88, 
         achievement: 'Type-Safe Code',
         color: 'from-blue-500 to-blue-700'
       },
       { 
+        name: 'CSS/Tailwind', 
+        icon: '🎨', 
+        level: 85, 
+        achievement: 'Responsive Design',
+        color: 'from-cyan-400 to-cyan-600'
+      },
+    ],
+    'Backend': [
+      { 
+        name: 'Node.js', 
+        icon: '💚', 
+        level: 87, 
+        achievement: 'Backend Expert',
+        color: 'from-green-400 to-green-600'
+      },
+      { 
         name: 'Express.js', 
         icon: '🚀', 
-        level: 88, 
+        level: 85, 
         achievement: 'API Development',
         color: 'from-gray-400 to-gray-600'
       },
+      { 
+        name: 'MongoDB', 
+        icon: '🗄️', 
+        level: 82, 
+        achievement: 'Database Design',
+        color: 'from-green-500 to-green-700'
+      },
+      { 
+        name: 'SQL/MySQL', 
+        icon: '🗃️', 
+        level: 80, 
+        achievement: 'Query Optimization',
+        color: 'from-blue-500 to-blue-700'
+      },
     ],
-    'Core CS Skills': [
+    'Programming Languages': [
       { 
         name: 'Java', 
         icon: '☕', 
-        level: 90, 
-        achievement: 'Solved 500+ Problems',
+        level: 93, 
+        achievement: 'LeetCode Expert',
         color: 'from-orange-400 to-red-600'
       },
       { 
+        name: 'Python', 
+        icon: '🐍', 
+        level: 85, 
+        achievement: 'Automation & Scripting',
+        color: 'from-blue-400 to-green-500'
+      },
+      { 
+        name: 'C/C++', 
+        icon: '⚡', 
+        level: 80, 
+        achievement: 'System Programming',
+        color: 'from-indigo-400 to-purple-600'
+      },
+    ],
+    'CS Fundamentals': [
+      { 
         name: 'Data Structures', 
         icon: '🧠', 
-        level: 88, 
-        achievement: 'Algorithm Expert',
+        level: 90, 
+        achievement: 'Advanced Knowledge',
         color: 'from-purple-400 to-purple-600'
       },
       { 
         name: 'Algorithms', 
         icon: '⚡', 
-        level: 85, 
-        achievement: 'Competitive Coder',
+        level: 88, 
+        achievement: 'Problem Solving',
         color: 'from-yellow-500 to-orange-600'
       },
       { 
-        name: 'DBMS', 
-        icon: '🗃️', 
-        level: 82, 
-        achievement: 'Query Optimization',
-        color: 'from-indigo-400 to-indigo-600'
-      },
-      { 
-        name: 'OOP', 
+        name: 'System Design', 
         icon: '🏗️', 
-        level: 90, 
-        achievement: 'Design Patterns',
+        level: 75, 
+        achievement: 'Scalable Solutions',
         color: 'from-teal-400 to-teal-600'
       },
       { 
-        name: 'Python', 
-        icon: '🐍', 
-        level: 80, 
-        achievement: 'Automation Scripts',
-        color: 'from-blue-400 to-green-500'
+        name: 'Database Design', 
+        icon: '💾', 
+        level: 82, 
+        achievement: 'Normalization Expert',
+        color: 'from-indigo-400 to-indigo-600'
       },
     ]
   };
 
-  const filterOptions = ['All', 'Fullstack Skills', 'Core CS Skills'];
+  const filterOptions = ['All', 'Frontend', 'Backend', 'Programming Languages', 'CS Fundamentals'];
 
   const getFilteredSkills = () => {
     if (activeFilter === 'All') {
@@ -125,7 +150,7 @@ const SkillsSection: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-purple-400 mx-auto mb-6" />
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            A comprehensive showcase of my technical proficiency and real-world achievements
+            Comprehensive technical skills developed through hands-on projects and continuous learning
           </p>
         </motion.div>
 
@@ -174,7 +199,7 @@ const SkillsSection: React.FC = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-green-400">{skill.level}%</div>
-                  <div className="text-xs text-gray-400">{skill.achievement}</div>
+                  <div className="text-xs text-gray-400">Proficiency</div>
                 </div>
               </div>
               
@@ -192,7 +217,7 @@ const SkillsSection: React.FC = () => {
                 </div>
                 
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-400">Proficiency</span>
+                  <span className="text-gray-400">Achievement</span>
                   <span className="text-green-400 font-medium">🚀 {skill.achievement}</span>
                 </div>
               </div>
@@ -207,17 +232,17 @@ const SkillsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-16 grid md:grid-cols-2 gap-8"
+            className="mt-16 grid md:grid-cols-2 lg:grid-cols-2 gap-8"
           >
             <div className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-500/30 rounded-xl p-8">
               <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                💻 Fullstack Development
+                💻 Full-Stack Development
               </h3>
               <p className="text-gray-300 mb-4">
-                Specialized in modern web technologies with focus on React ecosystem and Node.js backend development.
+                Proficient in modern web technologies including React ecosystem, Node.js backend, and database management.
               </p>
               <div className="flex flex-wrap gap-2">
-                {skillCategories['Fullstack Skills'].slice(0, 4).map((skill) => (
+                {[...skillCategories['Frontend'], ...skillCategories['Backend']].slice(0, 4).map((skill) => (
                   <span key={skill.name} className="px-3 py-1 bg-blue-600/30 text-blue-300 rounded-full text-sm">
                     {skill.icon} {skill.name}
                   </span>
@@ -227,13 +252,13 @@ const SkillsSection: React.FC = () => {
             
             <div className="bg-gradient-to-br from-green-900/50 to-teal-900/50 border border-green-500/30 rounded-xl p-8">
               <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                🧠 Computer Science Fundamentals
+                🧠 Computer Science & Problem Solving
               </h3>
               <p className="text-gray-300 mb-4">
-                Strong foundation in algorithms, data structures, and system design with competitive programming experience.
+                Strong foundation in algorithms, data structures, and competitive programming with proven problem-solving skills.
               </p>
               <div className="flex flex-wrap gap-2">
-                {skillCategories['Core CS Skills'].slice(0, 4).map((skill) => (
+                {[...skillCategories['Programming Languages'], ...skillCategories['CS Fundamentals']].slice(0, 4).map((skill) => (
                   <span key={skill.name} className="px-3 py-1 bg-green-600/30 text-green-300 rounded-full text-sm">
                     {skill.icon} {skill.name}
                   </span>
