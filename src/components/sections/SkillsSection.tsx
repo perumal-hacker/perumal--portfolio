@@ -1,48 +1,117 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Filter } from 'lucide-react';
 
 const SkillsSection: React.FC = () => {
-  const skillCategories = [
-    {
-      title: 'Languages',
-      skills: [
-        { name: 'JavaScript', level: 90 },
-        { name: 'Java', level: 85 },
-        { name: 'Python', level: 80 },
-        { name: 'C', level: 75 }
-      ]
-    },
-    {
-      title: 'Web Technologies',
-      skills: [
-        { name: 'React', level: 90 },
-        { name: 'Node.js', level: 85 },
-        { name: 'Express.js', level: 85 },
-        { name: 'MongoDB', level: 80 },
-        { name: 'HTML5/CSS3', level: 95 }
-      ]
-    },
-    {
-      title: 'Tools & Frameworks',
-      skills: [
-        { name: 'Git/GitHub', level: 90 },
-        { name: 'Tailwind CSS', level: 95 },
-        { name: 'Bootstrap', level: 85 },
-        { name: 'jQuery', level: 75 },
-        { name: 'Mongoose', level: 80 }
-      ]
-    }
-  ];
+  const [activeFilter, setActiveFilter] = useState('All');
 
-  const technologies = [
-    'React', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript', 'TypeScript',
-    'Python', 'Java', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap',
-    'Git', 'GitHub', 'RESTful APIs', 'JWT', 'Mongoose'
-  ];
+  const skillCategories = {
+    'Fullstack Skills': [
+      { 
+        name: 'React', 
+        icon: '⚛️', 
+        level: 90, 
+        achievement: 'Built 5+ Projects',
+        color: 'from-blue-400 to-blue-600'
+      },
+      { 
+        name: 'Node.js', 
+        icon: '💚', 
+        level: 85, 
+        achievement: 'Backend Expert',
+        color: 'from-green-400 to-green-600'
+      },
+      { 
+        name: 'MongoDB', 
+        icon: '🗄️', 
+        level: 80, 
+        achievement: 'Database Architect',
+        color: 'from-green-500 to-green-700'
+      },
+      { 
+        name: 'JavaScript', 
+        icon: '🟨', 
+        level: 92, 
+        achievement: 'Advanced ES6+',
+        color: 'from-yellow-400 to-yellow-600'
+      },
+      { 
+        name: 'TypeScript', 
+        icon: '💙', 
+        level: 85, 
+        achievement: 'Type-Safe Code',
+        color: 'from-blue-500 to-blue-700'
+      },
+      { 
+        name: 'Express.js', 
+        icon: '🚀', 
+        level: 88, 
+        achievement: 'API Development',
+        color: 'from-gray-400 to-gray-600'
+      },
+    ],
+    'Core CS Skills': [
+      { 
+        name: 'Java', 
+        icon: '☕', 
+        level: 90, 
+        achievement: 'Solved 500+ Problems',
+        color: 'from-orange-400 to-red-600'
+      },
+      { 
+        name: 'Data Structures', 
+        icon: '🧠', 
+        level: 88, 
+        achievement: 'Algorithm Expert',
+        color: 'from-purple-400 to-purple-600'
+      },
+      { 
+        name: 'Algorithms', 
+        icon: '⚡', 
+        level: 85, 
+        achievement: 'Competitive Coder',
+        color: 'from-yellow-500 to-orange-600'
+      },
+      { 
+        name: 'DBMS', 
+        icon: '🗃️', 
+        level: 82, 
+        achievement: 'Query Optimization',
+        color: 'from-indigo-400 to-indigo-600'
+      },
+      { 
+        name: 'OOP', 
+        icon: '🏗️', 
+        level: 90, 
+        achievement: 'Design Patterns',
+        color: 'from-teal-400 to-teal-600'
+      },
+      { 
+        name: 'Python', 
+        icon: '🐍', 
+        level: 80, 
+        achievement: 'Automation Scripts',
+        color: 'from-blue-400 to-green-500'
+      },
+    ]
+  };
+
+  const filterOptions = ['All', 'Fullstack Skills', 'Core CS Skills'];
+
+  const getFilteredSkills = () => {
+    if (activeFilter === 'All') {
+      return Object.entries(skillCategories).flatMap(([category, skills]) =>
+        skills.map(skill => ({ ...skill, category }))
+      );
+    }
+    return skillCategories[activeFilter as keyof typeof skillCategories]?.map(skill => 
+      ({ ...skill, category: activeFilter })
+    ) || [];
+  };
 
   return (
-    <section id="skills" className="section-padding">
+    <section id="skills" className="section-padding bg-gray-950 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -51,81 +120,128 @@ const SkillsSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Skills & Technologies</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto" />
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
+            Skills & Expertise
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-purple-400 mx-auto mb-6" />
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+            A comprehensive showcase of my technical proficiency and real-world achievements
+          </p>
         </motion.div>
 
-        {/* Skill Categories */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {skillCategories.map((category, categoryIndex) => (
+        {/* Filter Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-wrap justify-center gap-4 mb-12"
+        >
+          {filterOptions.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 ${
+                activeFilter === filter
+                  ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
+              }`}
+            >
+              <Filter className="w-4 h-4" />
+              {filter}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Skills Grid */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+          {getFilteredSkills().map((skill, index) => (
             <motion.div
-              key={category.title}
+              key={`${skill.name}-${skill.category}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
-              className="glass glass-dark p-8 rounded-2xl"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-green-500/50 transition-all duration-300 group"
             >
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-                {category.title}
-              </h3>
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-3xl">{skill.icon}</span>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                    {skill.name}
+                  </h3>
+                  <p className="text-sm text-gray-400">{skill.category}</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-green-400">{skill.level}%</div>
+                  <div className="text-xs text-gray-400">{skill.achievement}</div>
+                </div>
+              </div>
               
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">
-                        {skill.name}
-                      </span>
-                      <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                      <motion.div
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
-                      />
-                    </div>
-                  </div>
-                ))}
+              <div className="space-y-2">
+                <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                  <motion.div
+                    className={`h-full bg-gradient-to-r ${skill.color} rounded-full relative`}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
+                  >
+                    <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                  </motion.div>
+                </div>
+                
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-400">Proficiency</span>
+                  <span className="text-green-400 font-medium">🚀 {skill.achievement}</span>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Technology Tags */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-            Technologies I Work With
-          </h3>
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            {technologies.map((tech, index) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 font-medium shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 cursor-default"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
+        {/* Category Overview */}
+        {activeFilter === 'All' && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-16 grid md:grid-cols-2 gap-8"
+          >
+            <div className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-500/30 rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                💻 Fullstack Development
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Specialized in modern web technologies with focus on React ecosystem and Node.js backend development.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {skillCategories['Fullstack Skills'].slice(0, 4).map((skill) => (
+                  <span key={skill.name} className="px-3 py-1 bg-blue-600/30 text-blue-300 rounded-full text-sm">
+                    {skill.icon} {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-br from-green-900/50 to-teal-900/50 border border-green-500/30 rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                🧠 Computer Science Fundamentals
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Strong foundation in algorithms, data structures, and system design with competitive programming experience.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {skillCategories['Core CS Skills'].slice(0, 4).map((skill) => (
+                  <span key={skill.name} className="px-3 py-1 bg-green-600/30 text-green-300 rounded-full text-sm">
+                    {skill.icon} {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );

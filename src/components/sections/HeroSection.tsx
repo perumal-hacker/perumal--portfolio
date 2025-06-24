@@ -70,13 +70,13 @@ const HeroSection: React.FC = () => {
             <div className="h-20 md:h-16">
               <TypeAnimation
                 sequence={[
+                  'LeetCode Practitioner',
+                  2000,
+                  'Data Structures & Algorithms Specialist',
+                  2000,
                   'Full-Stack Developer',
                   2000,
-                  'MERN Stack Enthusiast',
-                  2000,
                   'Problem Solver',
-                  2000,
-                  'Software Engineer',
                   2000,
                 ]}
                 wrapper="h2"
@@ -87,6 +87,24 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
+          {/* Professional Tags */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <span className="px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm font-medium border border-green-200 dark:border-green-700">
+              💚 LeetCode Practitioner
+            </span>
+            <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-700">
+              🧠 DSA Specialist
+            </span>
+            <span className="px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium border border-purple-200 dark:border-purple-700">
+              💻 Full-Stack Developer
+            </span>
+          </motion.div>
+
           {/* Description */}
           <motion.p
             className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
@@ -95,7 +113,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             Computer Science Engineering student passionate about creating innovative web solutions 
-            with modern technologies and clean, efficient code.
+            with modern technologies and mastering algorithmic problem-solving.
           </motion.p>
 
           {/* CTA Buttons */}
