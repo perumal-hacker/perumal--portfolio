@@ -1,29 +1,39 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Server, Smartphone } from 'lucide-react';
+import { Code, Database, Server, Smartphone, Brain, Zap } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   const highlights = [
     {
       icon: Code,
       title: 'Frontend Development',
-      description: 'React, JavaScript, HTML5, CSS3, Tailwind CSS'
+      description: 'React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS'
     },
     {
       icon: Server,
       title: 'Backend Development',
-      description: 'Node.js, Express.js, RESTful APIs'
+      description: 'Node.js, Express.js, RESTful APIs, Microservices'
     },
     {
       icon: Database,
       title: 'Database Management',
-      description: 'MongoDB, Mongoose, SQL'
+      description: 'MongoDB, MySQL, PostgreSQL, Database Design & Optimization'
+    },
+    {
+      icon: Brain,
+      title: 'Data Structures & Algorithms',
+      description: 'Problem Solving, Algorithm Optimization, Competitive Programming'
+    },
+    {
+      icon: Zap,
+      title: 'Development Tools',
+      description: 'Git, Docker, VS Code, Postman, Chrome DevTools'
     },
     {
       icon: Smartphone,
       title: 'Responsive Design',
-      description: 'Mobile-first, Cross-browser compatibility'
+      description: 'Mobile-first Design, Cross-browser Compatibility, UI/UX'
     }
   ];
 
@@ -52,10 +62,12 @@ const AboutSection: React.FC = () => {
           >
             <div className="relative w-80 h-80 mx-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full animate-glow" />
-              <div className="absolute inset-2 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
-                <div className="w-64 h-64 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full flex items-center justify-center">
-                  <Code className="w-32 h-32 text-blue-600 dark:text-blue-400" />
-                </div>
+              <div className="absolute inset-2 bg-white dark:bg-gray-800 rounded-full overflow-hidden">
+                <img 
+                  src="/lovable-uploads/9e154c14-e954-4b08-90fd-4026d9b69346.png" 
+                  alt="Perumal S - Full Stack Developer"
+                  className="w-full h-full object-cover rounded-full"
+                />
               </div>
             </div>
           </motion.div>
@@ -69,19 +81,19 @@ const AboutSection: React.FC = () => {
             className="space-y-6"
           >
             <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Passionate Full-Stack Developer
+              Full-Stack Developer & Problem Solver
             </h3>
             
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              I'm a Computer Science Engineering student with a strong foundation in full-stack web development, 
-              particularly with the MERN stack. My journey in programming began with a curiosity about how things work, 
-              and has evolved into a passion for solving complex problems through elegant code.
+              I'm a passionate Computer Science Engineering student with expertise in the MERN stack and a strong 
+              foundation in data structures and algorithms. My coding journey is driven by curiosity and the 
+              desire to solve complex problems through elegant, efficient code.
             </p>
             
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Through hands-on projects and hackathons, I've developed expertise in building scalable web applications, 
-              implementing secure authentication systems, and creating intuitive user interfaces. I'm always eager to 
-              learn new technologies and contribute to innovative software solutions.
+              With proficiency in database management systems and competitive programming on LeetCode, I excel at 
+              building scalable web applications, optimizing database queries, and implementing robust backend 
+              architectures. I'm constantly exploring new technologies and contributing to innovative software solutions.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

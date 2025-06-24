@@ -11,7 +11,8 @@ const ProjectsSection: React.FC = () => {
       technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Stripe'],
       github: 'https://github.com/perumal-hacker/ecommerce-app',
       demo: 'https://demo-ecommerce.vercel.app',
-      gradient: 'from-blue-500 to-purple-600'
+      gradient: 'from-blue-500 to-purple-600',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=400&h=250'
     },
     {
       title: 'MERN Chat App',
@@ -19,7 +20,8 @@ const ProjectsSection: React.FC = () => {
       technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express.js'],
       github: 'https://github.com/perumal-hacker/mern-chat',
       demo: 'https://chat-app-demo.vercel.app',
-      gradient: 'from-green-500 to-blue-600'
+      gradient: 'from-green-500 to-blue-600',
+      image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80&w=400&h=250'
     },
     {
       title: 'CRUD User Management',
@@ -27,7 +29,8 @@ const ProjectsSection: React.FC = () => {
       technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
       github: 'https://github.com/perumal-hacker/crud-app',
       demo: 'https://crud-demo.vercel.app',
-      gradient: 'from-orange-500 to-red-600'
+      gradient: 'from-orange-500 to-red-600',
+      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=400&h=250'
     },
     {
       title: 'Chrome Extension',
@@ -35,7 +38,8 @@ const ProjectsSection: React.FC = () => {
       technologies: ['JavaScript', 'HTML5', 'CSS3', 'Chrome APIs'],
       github: 'https://github.com/perumal-hacker/chrome-theme-toggle',
       demo: null,
-      gradient: 'from-purple-500 to-pink-600'
+      gradient: 'from-purple-500 to-pink-600',
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=400&h=250'
     },
     {
       title: 'Snake Game',
@@ -43,7 +47,8 @@ const ProjectsSection: React.FC = () => {
       technologies: ['JavaScript', 'HTML5', 'CSS3', 'Canvas API'],
       github: 'https://github.com/perumal-hacker/snake-game',
       demo: 'https://snake-game-demo.vercel.app',
-      gradient: 'from-yellow-500 to-orange-600'
+      gradient: 'from-yellow-500 to-orange-600',
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=400&h=250'
     }
   ];
 
@@ -76,16 +81,26 @@ const ProjectsSection: React.FC = () => {
               whileHover={{ y: -10 }}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-2xl glass glass-dark p-6 h-full">
+              <div className="relative overflow-hidden rounded-2xl glass glass-dark h-full">
                 {/* Project gradient header */}
                 <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${project.gradient}`} />
                 
-                <div className="relative z-10 h-full flex flex-col">
+                {/* Project Image */}
+                <div className="relative overflow-hidden h-48">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                </div>
+                
+                <div className="relative z-10 p-6 flex flex-col h-full">
                   <div className="mb-4">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
                       {project.description}
                     </p>
                   </div>

@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Code, Trophy, Calendar, TrendingUp } from 'lucide-react';
+import { ExternalLink, Code, Trophy, Target, Database, Brain, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import axios from 'axios';
 
 interface LeetCodeStats {
@@ -20,16 +20,8 @@ interface LeetCodeStats {
   acceptanceRate: number;
 }
 
-interface SubmissionData {
-  timestamp: string;
-  statusDisplay: string;
-  lang: string;
-  title: string;
-}
-
 const LeetCodeSection: React.FC = () => {
   const [stats, setStats] = useState<LeetCodeStats | null>(null);
-  const [submissions, setSubmissions] = useState<SubmissionData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,7 +32,6 @@ const LeetCodeSection: React.FC = () => {
       try {
         setLoading(true);
         
-        // Fetch user stats
         const statsResponse = await axios.get(`https://alfa-leetcode-api.onrender.com/userProfile/${username}`);
         
         if (statsResponse.data) {
@@ -58,16 +49,6 @@ const LeetCodeSection: React.FC = () => {
           });
         }
 
-        // Fetch recent submissions
-        try {
-          const submissionsResponse = await axios.get(`https://alfa-leetcode-api.onrender.com/userProfile/${username}/submission`);
-          if (submissionsResponse.data && submissionsResponse.data.submission) {
-            setSubmissions(submissionsResponse.data.submission.slice(0, 20));
-          }
-        } catch (submissionError) {
-          console.log('Submissions not available');
-        }
-
       } catch (err) {
         console.error('Error fetching LeetCode data:', err);
         setError('Unable to fetch LeetCode data. Please try again later.');
@@ -79,50 +60,39 @@ const LeetCodeSection: React.FC = () => {
     fetchLeetCodeData();
   }, []);
 
-  // Chart data preparation
   const difficultyData = stats ? [
     { name: 'Easy', solved: stats.easySolved, total: stats.easyTotal, color: '#22c55e' },
     { name: 'Medium', solved: stats.mediumSolved, total: stats.mediumTotal, color: '#f59e0b' },
     { name: 'Hard', solved: stats.hardSolved, total: stats.hardTotal, color: '#ef4444' }
   ] : [];
 
-  const languageStats = submissions.reduce((acc: any, submission) => {
-    const lang = submission.lang || 'Unknown';
-    acc[lang] = (acc[lang] || 0) + 1;
-    return acc;
-  }, {});
-
-  const languageData = Object.entries(languageStats).map(([lang, count], index) => ({
-    name: lang,
-    value: count,
-    color: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'][index % 6]
-  }));
-
-  // Generate heatmap data (simplified)
-  const generateHeatmapData = () => {
-    const days = [];
-    const today = new Date();
-    for (let i = 364; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const submissions = Math.floor(Math.random() * 5); // Mock data
-      days.push({
-        date: date.toISOString().split('T')[0],
-        count: submissions,
-        level: submissions === 0 ? 0 : submissions <= 1 ? 1 : submissions <= 2 ? 2 : submissions <= 3 ? 3 : 4
-      });
+  const skillsData = [
+    {
+      title: 'Data Structures',
+      icon: Brain,
+      description: 'Arrays, Linked Lists, Trees, Graphs, Hash Tables, Stacks, Queues',
+      proficiency: 90
+    },
+    {
+      title: 'Algorithms',
+      icon: Zap,
+      description: 'Dynamic Programming, Greedy, BFS/DFS, Binary Search, Sorting',
+      proficiency: 85
+    },
+    {
+      title: 'Database Systems',
+      icon: Database,
+      description: 'SQL Queries, Database Design, Optimization, Indexing',
+      proficiency: 88
     }
-    return days;
-  };
-
-  const heatmapData = generateHeatmapData();
+  ];
 
   if (loading) {
     return (
       <section id="leetcode" className="section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Problem Solving</h2>
+            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Problem Solving Excellence</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6" />
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -144,7 +114,7 @@ const LeetCodeSection: React.FC = () => {
     return (
       <section id="leetcode" className="section-padding">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Problem Solving</h2>
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Problem Solving Excellence</h2>
           <div className="glass glass-dark p-8 rounded-2xl max-w-2xl mx-auto">
             <p className="text-red-500 mb-4">{error}</p>
             <a
@@ -172,14 +142,49 @@ const LeetCodeSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Problem Solving</h2>
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Problem Solving Excellence</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6" />
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            My LeetCode journey showcasing algorithmic problem-solving skills and competitive programming achievements.
+            Demonstrating algorithmic proficiency through competitive programming and mastery of data structures & database systems.
           </p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+        {/* Skills Overview */}
+        <div className="grid gap-6 md:grid-cols-3 mb-12">
+          {skillsData.map((skill, index) => (
+            <motion.div
+              key={skill.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <Card className="glass glass-dark h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <skill.icon className="w-8 h-8 text-blue-500" />
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{skill.title}</h3>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{skill.description}</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Proficiency</span>
+                      <span className="font-bold text-blue-600">{skill.proficiency}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-1000"
+                        style={{ width: `${skill.proficiency}%` }}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 mb-8">
           {/* Profile Summary */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -191,51 +196,55 @@ const LeetCodeSection: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Code className="w-5 h-5 text-blue-500" />
-                  Profile Overview
+                  LeetCode Profile
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                      <span className="text-white font-bold text-xl">P</span>
+                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white font-bold text-2xl">P</span>
                     </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white">@{username}</h3>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">@{username}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Competitive Programmer</p>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Total Solved:</span>
-                      <span className="font-bold text-green-600">{stats?.totalSolved || 0}</span>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                      <div className="text-2xl font-bold text-green-600">{stats?.totalSolved || 0}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Problems Solved</div>
                     </div>
-                    {stats?.ranking > 0 && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400">Ranking:</span>
-                        <span className="font-bold text-blue-600">#{stats.ranking}</span>
+                    <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <div className="text-2xl font-bold text-blue-600">{stats?.acceptanceRate || 0}%</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Acceptance Rate</div>
+                    </div>
+                  </div>
+
+                  {stats?.ranking > 0 && (
+                    <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                      <div className="flex items-center justify-center gap-2">
+                        <Trophy className="w-5 h-5 text-yellow-500" />
+                        <span className="text-lg font-bold text-purple-600">Rank #{stats.ranking}</span>
                       </div>
-                    )}
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Acceptance Rate:</span>
-                      <span className="font-bold text-purple-600">{stats?.acceptanceRate || 0}%</span>
                     </div>
-                  </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Problem Stats */}
+          {/* Problem Statistics */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="md:col-span-2"
           >
             <Card className="glass glass-dark h-full">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-yellow-500" />
-                  Problem Statistics
+                  <Target className="w-5 h-5 text-yellow-500" />
+                  Problem Breakdown
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -250,104 +259,25 @@ const LeetCodeSection: React.FC = () => {
                       <XAxis dataKey="name" />
                       <YAxis />
                       <ChartTooltip content={<ChartTooltipContent />} />
-                      <Bar dataKey="solved" fill="var(--color-solved)" />
+                      <Bar 
+                        dataKey="solved" 
+                        fill="var(--color-solved)"
+                        radius={[4, 4, 0, 0]}
+                      />
                     </BarChart>
                   </ResponsiveContainer>
                 </ChartContainer>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 mb-8">
-          {/* Submission Heatmap */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Card className="glass glass-dark h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-green-500" />
-                  Submission Activity
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-7 gap-1 text-xs">
-                  {heatmapData.slice(-49).map((day, index) => (
-                    <div
-                      key={index}
-                      className={`w-3 h-3 rounded-sm ${
-                        day.level === 0
-                          ? 'bg-gray-200 dark:bg-gray-700'
-                          : day.level === 1
-                          ? 'bg-green-200 dark:bg-green-900'
-                          : day.level === 2
-                          ? 'bg-green-300 dark:bg-green-700'
-                          : day.level === 3
-                          ? 'bg-green-400 dark:bg-green-600'
-                          : 'bg-green-500 dark:bg-green-500'
-                      }`}
-                      title={`${day.date}: ${day.count} submissions`}
-                    />
+                
+                <div className="mt-4 space-y-2">
+                  {difficultyData.map((item) => (
+                    <div key={item.name} className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{item.name}:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        {item.solved}/{item.total}
+                      </span>
+                    </div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between mt-4 text-xs text-gray-600 dark:text-gray-400">
-                  <span>Less</span>
-                  <div className="flex gap-1">
-                    <div className="w-3 h-3 bg-gray-200 dark:bg-gray-700 rounded-sm" />
-                    <div className="w-3 h-3 bg-green-200 dark:bg-green-900 rounded-sm" />
-                    <div className="w-3 h-3 bg-green-300 dark:bg-green-700 rounded-sm" />
-                    <div className="w-3 h-3 bg-green-400 dark:bg-green-600 rounded-sm" />
-                    <div className="w-3 h-3 bg-green-500 dark:bg-green-500 rounded-sm" />
-                  </div>
-                  <span>More</span>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Language Distribution */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Card className="glass glass-dark h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-purple-500" />
-                  Language Distribution
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ChartContainer
-                  config={{
-                    value: { label: "Problems", color: "hsl(var(--primary))" }
-                  }}
-                  className="h-64"
-                >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={languageData}
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={80}
-                        dataKey="value"
-                        label={({ name, value }) => `${name}: ${value}`}
-                      >
-                        {languageData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <ChartTooltip content={<ChartTooltipContent />} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </ChartContainer>
               </CardContent>
             </Card>
           </motion.div>
