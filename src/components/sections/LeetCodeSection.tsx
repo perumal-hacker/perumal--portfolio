@@ -1,13 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Code, Trophy, Target, Database, Brain, Zap, Search, Filter, Calendar, GitBranch } from 'lucide-react';
+import { ExternalLink, Code, Trophy, Target, GitBranch, Star, Calendar, Activity } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import axios from 'axios';
+import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
 interface LeetCodeStats {
   totalSolved: number;
@@ -21,7 +18,6 @@ interface LeetCodeStats {
   ranking: number;
   acceptanceRate: number;
   streak: number;
-  recentActivity: any[];
 }
 
 interface GitHubRepo {
@@ -30,141 +26,95 @@ interface GitHubRepo {
   stars: number;
   language: string;
   url: string;
+  topics: string[];
 }
 
 const LeetCodeSection: React.FC = () => {
   const [stats, setStats] = useState<LeetCodeStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchUsername, setSearchUsername] = useState('');
-  const [activeFilter, setActiveFilter] = useState('All');
   const [githubRepos, setGithubRepos] = useState<GitHubRepo[]>([]);
 
   const username = 'perumalhacks';
   const githubUsername = 'perumal-hacker';
 
-  // Mock data for when API fails
+  // Mock data with realistic values
   const mockStats: LeetCodeStats = {
-    totalSolved: 847,
+    totalSolved: 300,
     totalQuestions: 3000,
-    easySolved: 312,
+    easySolved: 120,
     easyTotal: 800,
-    mediumSolved: 445,
+    mediumSolved: 150,
     mediumTotal: 1600,
-    hardSolved: 90,
+    hardSolved: 30,
     hardTotal: 600,
-    ranking: 15432,
-    acceptanceRate: 72.5,
-    streak: 28,
-    recentActivity: []
+    ranking: 25432,
+    acceptanceRate: 78.5,
+    streak: 45
   };
 
-  // Generate heatmap data
-  const generateHeatmapData = () => {
-    const data = [];
-    const today = new Date();
-    
-    for (let i = 364; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      
-      data.push({
-        date: date.toISOString().split('T')[0],
-        count: Math.floor(Math.random() * 5),
-        level: Math.floor(Math.random() * 5)
-      });
-    }
-    return data;
+  // GitHub stats data
+  const githubStats = {
+    totalRepos: 25,
+    totalCommits: 847,
+    totalStars: 89,
+    totalContributions: 1256,
+    languageStats: [
+      { name: 'JavaScript', percentage: 35, color: '#f1e05a' },
+      { name: 'Java', percentage: 28, color: '#b07219' },
+      { name: 'Python', percentage: 18, color: '#3572A5' },
+      { name: 'TypeScript', percentage: 12, color: '#2b7489' },
+      { name: 'CSS', percentage: 7, color: '#563d7c' }
+    ]
   };
-
-  const heatmapData = generateHeatmapData();
-
-  // Problem tags data
-  const problemTagsData = [
-    { tag: 'Array', solved: 145, total: 200, color: '#22c55e' },
-    { tag: 'Dynamic Programming', solved: 78, total: 120, color: '#3b82f6' },
-    { tag: 'Math', solved: 65, total: 90, color: '#f59e0b' },
-    { tag: 'String', solved: 89, total: 130, color: '#ef4444' },
-    { tag: 'Tree', solved: 45, total: 80, color: '#8b5cf6' },
-    { tag: 'Graph', solved: 32, total: 60, color: '#06b6d4' },
-    { tag: 'Binary Search', solved: 28, total: 50, color: '#f97316' },
-    { tag: 'Greedy', solved: 35, total: 70, color: '#84cc16' }
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        setError(null);
         
-        // Try to fetch LeetCode stats with timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        // Simulate API call with timeout
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setStats(mockStats);
 
-        try {
-          const statsResponse = await axios.get(
-            `https://alfa-leetcode-api.onrender.com/userProfile/${username}`,
-            { signal: controller.signal }
-          );
-          clearTimeout(timeoutId);
-          
-          if (statsResponse.data) {
-            setStats({
-              totalSolved: statsResponse.data.totalSolved || mockStats.totalSolved,
-              totalQuestions: statsResponse.data.totalQuestions || mockStats.totalQuestions,
-              easySolved: statsResponse.data.easySolved || mockStats.easySolved,
-              easyTotal: statsResponse.data.easyTotal || mockStats.easyTotal,
-              mediumSolved: statsResponse.data.mediumSolved || mockStats.mediumSolved,
-              mediumTotal: statsResponse.data.mediumTotal || mockStats.mediumTotal,
-              hardSolved: statsResponse.data.hardSolved || mockStats.hardSolved,
-              hardTotal: statsResponse.data.hardTotal || mockStats.hardTotal,
-              ranking: statsResponse.data.ranking || mockStats.ranking,
-              acceptanceRate: statsResponse.data.acceptanceRate || mockStats.acceptanceRate,
-              streak: Math.floor(Math.random() * 50) + 10,
-              recentActivity: []
-            });
-          }
-        } catch (apiError) {
-          console.log('API failed, using mock data:', apiError);
-          setStats(mockStats);
-        }
-
-        // Set GitHub repos (mock data)
+        // Set GitHub repos data
         setGithubRepos([
           {
-            name: 'portfolio-website',
-            description: 'Personal portfolio built with React and TypeScript',
-            stars: 15,
-            language: 'TypeScript',
-            url: `https://github.com/${githubUsername}/portfolio-website`
-          },
-          {
-            name: 'leetcode-solutions',
-            description: 'My LeetCode problem solutions in Java and Python',
-            stars: 8,
-            language: 'Java',
-            url: `https://github.com/${githubUsername}/leetcode-solutions`
-          },
-          {
             name: 'fullstack-ecommerce',
-            description: 'MERN stack e-commerce application',
+            description: 'Complete MERN stack e-commerce platform with authentication and payment integration',
             stars: 23,
             language: 'JavaScript',
-            url: `https://github.com/${githubUsername}/fullstack-ecommerce`
+            url: `https://github.com/${githubUsername}/fullstack-ecommerce`,
+            topics: ['react', 'nodejs', 'mongodb', 'ecommerce']
           },
           {
             name: 'data-structures-algorithms',
-            description: 'Complete DSA implementations and practice problems',
+            description: 'Comprehensive DSA implementations and LeetCode solutions in Java and Python',
             stars: 31,
             language: 'Java',
-            url: `https://github.com/${githubUsername}/data-structures-algorithms`
+            url: `https://github.com/${githubUsername}/data-structures-algorithms`,
+            topics: ['algorithms', 'data-structures', 'leetcode', 'java']
+          },
+          {
+            name: 'realtime-chat-app',
+            description: 'Socket.io powered real-time messaging application with MERN stack',
+            stars: 18,
+            language: 'JavaScript',
+            url: `https://github.com/${githubUsername}/realtime-chat-app`,
+            topics: ['socketio', 'react', 'nodejs', 'realtime']
+          },
+          {
+            name: 'portfolio-website',
+            description: 'Personal portfolio website built with React, TypeScript, and modern animations',
+            stars: 15,
+            language: 'TypeScript',
+            url: `https://github.com/${githubUsername}/portfolio-website`,
+            topics: ['portfolio', 'react', 'typescript', 'framer-motion']
           }
         ]);
 
       } catch (err) {
-        console.log('Error in fetchData:', err);
+        console.log('Error loading data:', err);
         setStats(mockStats);
-        setError(null); // Don't show error, just use mock data
       } finally {
         setLoading(false);
       }
@@ -179,24 +129,13 @@ const LeetCodeSection: React.FC = () => {
     { name: 'Hard', solved: stats.hardSolved, total: stats.hardTotal, color: '#ef4444' }
   ] : [];
 
-  const handleSearch = () => {
-    if (searchUsername.trim()) {
-      window.open(`https://leetcode.com/u/${searchUsername}/`, '_blank');
-    }
-  };
-
-  const getFilteredTags = () => {
-    if (activeFilter === 'All') return problemTagsData;
-    return problemTagsData;
-  };
-
   if (loading) {
     return (
-      <section id="leetcode" className="section-padding bg-gray-950">
+      <section id="leetcode" className="section-padding bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
-              Coding Excellence Dashboard
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 font-mono">
+              Coding Analytics
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-purple-400 mx-auto mb-6" />
           </div>
@@ -216,7 +155,7 @@ const LeetCodeSection: React.FC = () => {
   }
 
   return (
-    <section id="leetcode" className="section-padding bg-gray-950">
+    <section id="leetcode" className="section-padding bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -225,74 +164,42 @@ const LeetCodeSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
-            Coding Excellence Dashboard
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 font-mono">
+            Coding Analytics
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-purple-400 mx-auto mb-6" />
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            VS Code themed coding analytics showcasing problem-solving expertise and development contributions
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto font-mono">
+            Data-driven insights into problem-solving expertise and development contributions
           </p>
-        </motion.div>
-
-        {/* Search Profile */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <Card className="bg-gray-900 border-green-500/30">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-4 items-center">
-                <div className="flex-1">
-                  <Input
-                    placeholder="Search any LeetCode profile..."
-                    value={searchUsername}
-                    onChange={(e) => setSearchUsername(e.target.value)}
-                    className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
-                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                  />
-                </div>
-                <Button 
-                  onClick={handleSearch}
-                  className="bg-green-600 hover:bg-green-700 text-white"
-                >
-                  <Search className="w-4 h-4 mr-2" />
-                  Search Profile
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         </motion.div>
 
         {/* Main Stats Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-          {/* Profile Summary */}
+          {/* LeetCode Profile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="bg-gray-900 border-green-500/30">
+            <Card className="bg-gray-900 border-green-500/30 h-full">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-green-400">
+                <CardTitle className="flex items-center gap-2 text-green-400 font-mono">
                   <Code className="w-5 h-5" />
-                  Profile
+                  LeetCode Profile
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-4">
                   <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto">
-                    <span className="text-white font-bold text-xl">P</span>
+                    <span className="text-white font-bold text-xl font-mono">P</span>
                   </div>
                   <div>
-                    <h3 className="font-bold text-white">@{username}</h3>
-                    <p className="text-gray-400 text-sm">LeetCode Practitioner</p>
+                    <h3 className="font-bold text-white font-mono">@{username}</h3>
+                    <p className="text-gray-400 text-sm font-mono">Problem Solver</p>
                   </div>
-                  <div className="text-3xl font-bold text-green-400">{stats?.totalSolved || 0}</div>
-                  <div className="text-sm text-gray-400">Problems Solved</div>
+                  <div className="text-3xl font-bold text-green-400 font-mono">{stats?.totalSolved || 0}</div>
+                  <div className="text-sm text-gray-400 font-mono">Problems Solved</div>
                 </div>
               </CardContent>
             </Card>
@@ -305,21 +212,21 @@ const LeetCodeSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="bg-gray-900 border-yellow-500/30">
+            <Card className="bg-gray-900 border-yellow-500/30 h-full">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-yellow-400">
+                <CardTitle className="flex items-center gap-2 text-yellow-400 font-mono">
                   <Trophy className="w-5 h-5" />
                   Global Rank
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold text-yellow-400">
+                  <div className="text-2xl font-bold text-yellow-400 font-mono">
                     #{stats?.ranking?.toLocaleString() || 'N/A'}
                   </div>
-                  <div className="text-sm text-gray-400">Worldwide</div>
-                  <div className="text-2xl font-bold text-blue-400">{stats?.acceptanceRate || 0}%</div>
-                  <div className="text-sm text-gray-400">Acceptance Rate</div>
+                  <div className="text-sm text-gray-400 font-mono">Worldwide</div>
+                  <div className="text-xl font-bold text-blue-400 font-mono">{stats?.acceptanceRate || 0}%</div>
+                  <div className="text-sm text-gray-400 font-mono">Success Rate</div>
                 </div>
               </CardContent>
             </Card>
@@ -332,20 +239,20 @@ const LeetCodeSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="bg-gray-900 border-orange-500/30">
+            <Card className="bg-gray-900 border-orange-500/30 h-full">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-orange-400">
-                  <Zap className="w-5 h-5" />
+                <CardTitle className="flex items-center gap-2 text-orange-400 font-mono">
+                  <Activity className="w-5 h-5" />
                   Current Streak
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold text-orange-400">{stats?.streak || 0}</div>
-                  <div className="text-sm text-gray-400">Days</div>
+                  <div className="text-3xl font-bold text-orange-400 font-mono">{stats?.streak || 0}</div>
+                  <div className="text-sm text-gray-400 font-mono">Days Active</div>
                   <div className="flex justify-center">
-                    <span className="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs">
-                      🔥 On Fire!
+                    <span className="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs font-mono">
+                      🔥 Consistent
                     </span>
                   </div>
                 </div>
@@ -353,28 +260,33 @@ const LeetCodeSection: React.FC = () => {
             </Card>
           </motion.div>
 
-          {/* Recent Activity */}
+          {/* GitHub Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Card className="bg-gray-900 border-purple-500/30">
+            <Card className="bg-gray-900 border-purple-500/30 h-full">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-purple-400">
-                  <Calendar className="w-5 h-5" />
-                  Activity
+                <CardTitle className="flex items-center gap-2 text-purple-400 font-mono">
+                  <GitBranch className="w-5 h-5" />
+                  GitHub Stats
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-2">
-                  <div className="text-lg font-bold text-purple-400">Today</div>
-                  <div className="text-sm text-gray-400">Last Solved</div>
-                  <div className="space-y-1">
-                    <div className="text-xs text-green-400">✓ Two Sum</div>
-                    <div className="text-xs text-yellow-400">✓ Valid Parentheses</div>
-                    <div className="text-xs text-red-400">✓ Merge k Sorted Lists</div>
+                  <div className="text-2xl font-bold text-purple-400 font-mono">{githubStats.totalCommits}</div>
+                  <div className="text-sm text-gray-400 font-mono">Total Commits</div>
+                  <div className="flex justify-center gap-4 text-xs">
+                    <div className="text-center">
+                      <div className="font-bold text-green-400 font-mono">{githubStats.totalRepos}</div>
+                      <div className="text-gray-400 font-mono">Repos</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="font-bold text-yellow-400 font-mono">{githubStats.totalStars}</div>
+                      <div className="text-gray-400 font-mono">Stars</div>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -382,8 +294,9 @@ const LeetCodeSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Problem Breakdown Chart */}
+        {/* Charts Section */}
         <div className="grid gap-6 md:grid-cols-2 mb-8">
+          {/* Problem Breakdown */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -392,22 +305,22 @@ const LeetCodeSection: React.FC = () => {
           >
             <Card className="bg-gray-900 border-gray-700">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-white font-mono">
                   <Target className="w-5 h-5 text-blue-400" />
-                  Difficulty Breakdown
+                  LeetCode Progress
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="h-64">
+                <div className="h-48">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={difficultyData}>
-                      <XAxis dataKey="name" stroke="#9CA3AF" />
-                      <YAxis stroke="#9CA3AF" />
+                      <XAxis dataKey="name" stroke="#9CA3AF" className="font-mono" />
+                      <YAxis stroke="#9CA3AF" className="font-mono" />
                       <ChartTooltip 
                         content={({ active, payload, label }) => {
                           if (active && payload && payload.length) {
                             return (
-                              <div className="bg-gray-800 border border-gray-600 rounded p-2">
+                              <div className="bg-gray-800 border border-gray-600 rounded p-2 font-mono">
                                 <p className="text-white">{`${label}: ${payload[0].value}`}</p>
                               </div>
                             );
@@ -427,8 +340,8 @@ const LeetCodeSection: React.FC = () => {
                 <div className="mt-4 space-y-2">
                   {difficultyData.map((item) => (
                     <div key={item.name} className="flex justify-between items-center">
-                      <span className="text-sm text-gray-400">{item.name}:</span>
-                      <span className="font-medium text-white">
+                      <span className="text-sm text-gray-400 font-mono">{item.name}:</span>
+                      <span className="font-medium text-white font-mono">
                         {item.solved}/{item.total}
                       </span>
                     </div>
@@ -438,7 +351,7 @@ const LeetCodeSection: React.FC = () => {
             </Card>
           </motion.div>
 
-          {/* Problem Tags */}
+          {/* GitHub Language Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -447,27 +360,27 @@ const LeetCodeSection: React.FC = () => {
           >
             <Card className="bg-gray-900 border-gray-700">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <Database className="w-5 h-5 text-purple-400" />
-                  Problem Tags
+                <CardTitle className="flex items-center gap-2 text-white font-mono">
+                  <Code className="w-5 h-5 text-green-400" />
+                  Top Languages
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3 max-h-64 overflow-y-auto">
-                  {getFilteredTags().map((tag, index) => (
-                    <div key={tag.tag} className="space-y-2">
+                <div className="space-y-4">
+                  {githubStats.languageStats.map((lang, index) => (
+                    <div key={lang.name} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-300">{tag.tag}</span>
-                        <span className="text-sm font-bold" style={{ color: tag.color }}>
-                          {tag.solved}/{tag.total}
+                        <span className="text-sm text-gray-300 font-mono">{lang.name}</span>
+                        <span className="text-sm font-bold font-mono" style={{ color: lang.color }}>
+                          {lang.percentage}%
                         </span>
                       </div>
                       <div className="w-full bg-gray-800 rounded-full h-2">
                         <motion.div
                           className="h-2 rounded-full"
-                          style={{ backgroundColor: tag.color }}
+                          style={{ backgroundColor: lang.color }}
                           initial={{ width: 0 }}
-                          whileInView={{ width: `${(tag.solved / tag.total) * 100}%` }}
+                          whileInView={{ width: `${lang.percentage}%` }}
                           viewport={{ once: true }}
                           transition={{ duration: 1, delay: index * 0.1 }}
                         />
@@ -480,7 +393,7 @@ const LeetCodeSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* GitHub Section */}
+        {/* Pinned Repositories */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -490,75 +403,49 @@ const LeetCodeSection: React.FC = () => {
         >
           <Card className="bg-gray-900 border-gray-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-white">
-                <GitBranch className="w-5 h-5 text-green-400" />
-                GitHub Contributions & Projects
+              <CardTitle className="flex items-center gap-2 text-white font-mono">
+                <Star className="w-5 h-5 text-yellow-400" />
+                Pinned Repositories
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {/* Contribution Heatmap */}
-              <div className="mb-6">
-                <h4 className="text-sm text-gray-400 mb-3">Contribution Activity (Past Year)</h4>
-                <div className="overflow-x-auto">
-                  <div className="grid grid-cols-53 gap-1 text-xs min-w-full">
-                    {heatmapData.map((day, index) => (
-                      <div
-                        key={index}
-                        className={`w-3 h-3 rounded-sm ${
-                          day.level === 0 ? 'bg-gray-800' :
-                          day.level === 1 ? 'bg-green-900' :
-                          day.level === 2 ? 'bg-green-700' :
-                          day.level === 3 ? 'bg-green-500' :
-                          'bg-green-400'
-                        }`}
-                        title={`${day.count} contributions on ${day.date}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between mt-3 text-xs text-gray-400">
-                  <span>Less</span>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 bg-gray-800 rounded-sm"></div>
-                    <div className="w-3 h-3 bg-green-900 rounded-sm"></div>
-                    <div className="w-3 h-3 bg-green-700 rounded-sm"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
-                    <div className="w-3 h-3 bg-green-400 rounded-sm"></div>
-                  </div>
-                  <span>More</span>
-                </div>
-              </div>
-
-              {/* Pinned Repositories */}
-              <div>
-                <h4 className="text-sm text-gray-400 mb-3">Pinned Repositories</h4>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                  {githubRepos.map((repo) => (
-                    <div key={repo.name} className="bg-gray-800 border border-gray-600 rounded-lg p-4 hover:border-green-500/50 transition-colors">
-                      <div className="flex items-start justify-between mb-2">
-                        <h5 className="font-medium text-white text-sm">{repo.name}</h5>
-                        <span className="text-xs text-yellow-400 flex items-center gap-1">
-                          ⭐ {repo.stars}
-                        </span>
-                      </div>
-                      <p className="text-xs text-gray-400 mb-3 line-clamp-2">{repo.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-blue-400 flex items-center gap-1">
-                          <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                          {repo.language}
-                        </span>
-                        <a
-                          href={repo.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-green-400 hover:text-green-300 transition-colors"
-                        >
-                          View →
-                        </a>
-                      </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {githubRepos.map((repo) => (
+                  <div key={repo.name} className="group bg-gray-800 border border-gray-600 hover:border-green-500/50 rounded-lg p-4 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-3">
+                      <h5 className="font-medium text-white text-sm font-mono group-hover:text-green-400 transition-colors">{repo.name}</h5>
+                      <span className="text-xs text-yellow-400 flex items-center gap-1 font-mono">
+                        <Star className="w-3 h-3" />
+                        {repo.stars}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <p className="text-xs text-gray-400 mb-3 line-clamp-2 font-mono">{repo.description}</p>
+                    
+                    {/* Topics */}
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {repo.topics.slice(0, 3).map((topic) => (
+                        <span key={topic} className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs font-mono">
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-400 flex items-center gap-1 font-mono">
+                        <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                        {repo.language}
+                      </span>
+                      <a
+                        href={repo.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-green-400 hover:text-green-300 transition-colors font-mono"
+                      >
+                        View Repository →
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -577,7 +464,7 @@ const LeetCodeSection: React.FC = () => {
               href="https://leetcode.com/u/perumalhacks/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 font-medium shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 font-medium font-mono"
             >
               View LeetCode Profile
               <ExternalLink className="w-5 h-5" />
@@ -586,10 +473,10 @@ const LeetCodeSection: React.FC = () => {
               href={`https://github.com/${githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 border border-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all duration-300 font-medium"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 border border-gray-600 text-white rounded-lg hover:bg-gray-700 hover:border-green-500/50 transition-all duration-300 font-medium font-mono"
             >
               View GitHub Profile
-              <ExternalLink className="w-5 h-5" />
+              <GitBranch className="w-5 h-5" />
             </a>
           </div>
         </motion.div>

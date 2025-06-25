@@ -13,7 +13,7 @@ import CertificationsSection from '@/components/sections/CertificationsSection';
 const Index = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-black text-white">
         <Navigation />
         <ThemeToggle />
         
@@ -25,17 +25,19 @@ const Index = () => {
           <LeetCodeSection />
 
           {/* Education Section */}
-          <section id="education" className="section-padding">
+          <section id="education" className="section-padding bg-gray-950">
             <div className="max-w-7xl mx-auto text-center">
-              <h2 className="text-4xl font-bold gradient-text mb-8">Education</h2>
-              <div className="glass glass-dark p-8 rounded-2xl max-w-2xl mx-auto">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
+                Education
+              </h2>
+              <div className="bg-gray-900 border border-gray-700 hover:border-green-500/50 p-8 rounded-2xl max-w-2xl mx-auto transition-all duration-300">
+                <h3 className="text-2xl font-bold text-white mb-4 font-mono">
                   K S Rangasamy College of Technology
                 </h3>
-                <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">
+                <p className="text-lg text-gray-300 mb-2 font-mono">
                   Bachelor of Engineering - Computer Science and Engineering
                 </p>
-                <p className="text-blue-600 dark:text-blue-400 font-semibold">
+                <p className="text-green-400 font-semibold font-mono">
                   2022 - 2026 | CGPA: 8.20
                 </p>
               </div>
@@ -44,27 +46,45 @@ const Index = () => {
 
           <CertificationsSection />
 
-          {/* Achievements Section */}
-          <section id="achievements" className="section-padding">
+          {/* Enhanced Achievements Section */}
+          <section id="achievements" className="section-padding bg-black">
             <div className="max-w-7xl mx-auto text-center">
-              <h2 className="text-4xl font-bold gradient-text mb-8">Achievements</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="glass glass-dark p-8 rounded-2xl">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                    🏆 Hackathon Participation
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
+                Achievements
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-gray-900 border border-gray-700 hover:border-green-500/50 p-8 rounded-2xl transition-all duration-300 group">
+                  <div className="text-4xl mb-4">🏆</div>
+                  <h3 className="text-xl font-bold text-white mb-4 font-mono group-hover:text-green-400 transition-colors">
+                    Hackathon Participation
                   </h3>
-                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                  <ul className="space-y-2 text-gray-300 font-mono">
                     <li>• Bhumi Hackathon 2024-2025</li>
                     <li>• Smart India Hackathon 2024</li>
                   </ul>
                 </div>
-                <div className="glass glass-dark p-8 rounded-2xl">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                    🎯 Coding Competitions
+                
+                <div className="bg-gray-900 border border-gray-700 hover:border-purple-500/50 p-8 rounded-2xl transition-all duration-300 group">
+                  <div className="text-4xl mb-4">🎯</div>
+                  <h3 className="text-xl font-bold text-white mb-4 font-mono group-hover:text-purple-400 transition-colors">
+                    Problem Solving Excellence
                   </h3>
-                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                    <li>• Active on LeetCode platform</li>
-                    <li>• Participated in tech symposiums</li>
+                  <ul className="space-y-2 text-gray-300 font-mono">
+                    <li>• <strong className="text-green-400">300+ LeetCode Problems</strong> Solved</li>
+                    <li>• Advanced DSA Mastery</li>
+                    <li>• Competitive Programming</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-gray-900 border border-gray-700 hover:border-blue-500/50 p-8 rounded-2xl transition-all duration-300 group">
+                  <div className="text-4xl mb-4">💻</div>
+                  <h3 className="text-xl font-bold text-white mb-4 font-mono group-hover:text-blue-400 transition-colors">
+                    Development Milestones
+                  </h3>
+                  <ul className="space-y-2 text-gray-300 font-mono">
+                    <li>• 10+ Full-Stack Projects</li>
+                    <li>• MERN Stack Expertise</li>
+                    <li>• Open Source Contributions</li>
                   </ul>
                 </div>
               </div>
@@ -72,32 +92,33 @@ const Index = () => {
           </section>
 
           {/* Contact Section */}
-          <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-900/50">
+          <section id="contact" className="section-padding bg-gray-950">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl font-bold gradient-text mb-8">Get In Touch</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">
-                I'm always interested in new opportunities and collaborations. 
-                Let's connect and build something amazing together!
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
+                Get In Touch
+              </h2>
+              <p className="text-lg text-gray-300 mb-12 font-mono">
+                Ready to collaborate on innovative projects? Let's build something amazing together.
               </p>
               
-              <div className="glass glass-dark p-8 rounded-2xl">
+              <div className="bg-gray-900 border border-gray-700 hover:border-green-500/50 p-8 rounded-2xl transition-all duration-300">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Contact Info</h3>
+                    <h3 className="text-xl font-bold text-white mb-4 font-mono">Contact Information</h3>
                     <div className="space-y-4 text-left">
-                      <a href="mailto:perumal.infonet@gmail.com" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <a href="mailto:perumal.infonet@gmail.com" className="flex items-center gap-3 text-gray-300 hover:text-green-400 transition-colors font-mono">
                         <span className="w-5 h-5">📧</span>
                         perumal.infonet@gmail.com
                       </a>
-                      <a href="https://www.linkedin.com/in/perumal-s-dev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <a href="https://www.linkedin.com/in/perumal-s-dev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors font-mono">
                         <span className="w-5 h-5">🔗</span>
                         linkedin.com/in/perumal-s-dev
                       </a>
-                      <a href="https://github.com/perumal-hacker" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <a href="https://github.com/perumal-hacker" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-300 hover:text-green-400 transition-colors font-mono">
                         <span className="w-5 h-5">💻</span>
                         github.com/perumal-hacker
                       </a>
-                      <a href="https://leetcode.com/u/perumalhacks/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <a href="https://leetcode.com/u/perumalhacks/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-300 hover:text-orange-400 transition-colors font-mono">
                         <span className="w-5 h-5">⚡</span>
                         leetcode.com/u/perumalhacks
                       </a>
@@ -105,26 +126,26 @@ const Index = () => {
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Send Message</h3>
+                    <h3 className="text-xl font-bold text-white mb-4 font-mono">Send Message</h3>
                     <form className="space-y-4">
                       <input
                         type="text"
                         placeholder="Your Name"
-                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-white font-mono"
                       />
                       <input
                         type="email"
                         placeholder="Your Email"
-                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-white font-mono"
                       />
                       <textarea
                         placeholder="Your Message"
                         rows={4}
-                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-white font-mono"
                       />
                       <button
                         type="submit"
-                        className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+                        className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white rounded-lg font-semibold transition-all duration-300 font-mono"
                       >
                         Send Message
                       </button>
@@ -137,10 +158,10 @@ const Index = () => {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12">
+        <footer className="bg-black border-t border-gray-800 text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-gray-400">
-              © 2024 Perumal S. All rights reserved.
+            <p className="text-gray-400 font-mono">
+              © 2024 Perumal S. Crafted with passion and precision.
             </p>
           </div>
         </footer>

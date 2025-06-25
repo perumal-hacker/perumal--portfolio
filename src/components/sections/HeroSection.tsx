@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, Download, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, Mail, Download, ArrowDown, Code, Terminal } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const socialLinks = [
@@ -11,41 +11,43 @@ const HeroSection: React.FC = () => {
     { icon: Mail, href: 'mailto:perumal.infonet@gmail.com', label: 'Email' }
   ];
 
+  const quotes = [
+    "Turning ideas into scalable, full-stack applications.",
+    "Talk is cheap, show me the code.",
+    "Building the future, one line at a time."
+  ];
+
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20" />
-      
-      {/* Animated background elements */}
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
+      {/* Animated background grid */}
       <div className="absolute inset-0">
-        {[...Array(6)].map((_, i) => (
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        
+        {/* Floating code elements */}
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-96 h-96 rounded-full opacity-10 dark:opacity-5"
+            className="absolute font-mono text-green-500/20 text-xs md:text-sm"
             style={{
-              background: `linear-gradient(45deg, ${i % 2 === 0 ? '#3B82F6' : '#8B5CF6'}, transparent)`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              x: [0, 100, 0],
-              y: [0, -100, 0],
-              rotate: [0, 180, 360],
+              y: [0, -20, 0],
+              opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: 20 + i * 5,
+              duration: 4 + i,
               repeat: Infinity,
-              ease: "linear"
+              ease: "easeInOut"
             }}
-          />
+          >
+            {['const', 'function', '{}', '[]', '=>', 'async', 'await', 'return'][i]}
+          </motion.div>
         ))}
       </div>
 
@@ -56,13 +58,36 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
+          {/* Terminal-style introduction */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="bg-gray-900 border border-gray-700 rounded-lg p-6 font-mono text-left max-w-2xl mx-auto mb-8"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-gray-400 text-sm">~/portfolio</span>
+            </div>
+            <div className="space-y-2 text-sm">
+              <div className="text-green-400">$ whoami</div>
+              <div className="text-white">Perumal S - Full Stack Developer</div>
+              <div className="text-green-400">$ echo $EXPERTISE</div>
+              <div className="text-white">MERN Stack | DSA | Problem Solving | 300+ LeetCode</div>
+            </div>
+          </motion.div>
+
           {/* Main heading */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             <motion.h1
-              className="text-5xl md:text-7xl font-bold gradient-text"
+              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-mono"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               Perumal S
             </motion.h1>
@@ -70,63 +95,70 @@ const HeroSection: React.FC = () => {
             <div className="h-20 md:h-16">
               <TypeAnimation
                 sequence={[
-                  'LeetCode Practitioner',
-                  2000,
-                  'Data Structures & Algorithms Specialist',
-                  2000,
                   'Full-Stack Developer',
                   2000,
+                  'MERN Stack Specialist',
+                  2000,
                   'Problem Solver',
+                  2000,
+                  'DSA Expert',
                   2000,
                 ]}
                 wrapper="h2"
                 speed={50}
-                className="text-2xl md:text-4xl font-semibold text-gray-700 dark:text-gray-300"
+                className="text-2xl md:text-4xl font-semibold text-gray-300 font-mono"
                 repeat={Infinity}
               />
             </div>
           </div>
 
-          {/* Professional Tags */}
+          {/* Professional badges */}
           <motion.div
             className="flex flex-wrap justify-center gap-4 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <span className="px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm font-medium border border-green-200 dark:border-green-700">
-              💚 LeetCode Practitioner
-            </span>
-            <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-700">
-              🧠 DSA Specialist
-            </span>
-            <span className="px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium border border-purple-200 dark:border-purple-700">
-              💻 Full-Stack Developer
-            </span>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Computer Science Engineering student passionate about creating innovative web solutions 
-            with modern technologies and mastering algorithmic problem-solving.
-          </motion.p>
+            <div className="px-4 py-2 bg-gray-900 border border-green-500/30 text-green-400 rounded-lg text-sm font-mono flex items-center gap-2">
+              <Code className="w-4 h-4" />
+              MERN Stack
+            </div>
+            <div className="px-4 py-2 bg-gray-900 border border-blue-500/30 text-blue-400 rounded-lg text-sm font-mono flex items-center gap-2">
+              <Terminal className="w-4 h-4" />
+              300+ LeetCode
+            </div>
+            <div className="px-4 py-2 bg-gray-900 border border-purple-500/30 text-purple-400 rounded-lg text-sm font-mono">
+              DSA Expert
+            </div>
+          </motion.div>
+
+          {/* Rotating quotes */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="max-w-4xl mx-auto"
+          >
+            <TypeAnimation
+              sequence={quotes.flatMap(quote => [quote, 3000])}
+              wrapper="p"
+              speed={50}
+              className="text-lg md:text-xl text-gray-400 italic font-mono"
+              repeat={Infinity}
+            />
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
           >
             <motion.button
               onClick={scrollToProjects}
-              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg shadow-lg transition-all duration-300 flex items-center gap-2"
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }}
+              className="px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg font-semibold text-lg transition-all duration-300 flex items-center gap-2 hover:from-green-700 hover:to-blue-700 font-mono"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               View Projects
@@ -136,7 +168,7 @@ const HeroSection: React.FC = () => {
             <motion.a
               href="/resume.pdf"
               download
-              className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:border-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center gap-2"
+              className="px-8 py-4 border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-black rounded-lg font-semibold text-lg transition-all duration-300 flex items-center gap-2 font-mono"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -150,7 +182,7 @@ const HeroSection: React.FC = () => {
             className="flex justify-center space-x-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
           >
             {socialLinks.map((social, index) => (
               <motion.a
@@ -158,38 +190,16 @@ const HeroSection: React.FC = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-full glass glass-dark hover:bg-white/20 dark:hover:bg-gray-700/20 transition-all duration-300 group"
+                className="p-4 rounded-lg bg-gray-900 border border-gray-700 hover:border-green-500/50 transition-all duration-300 group"
                 whileHover={{ scale: 1.1, y: -5 }}
                 whileTap={{ scale: 0.9 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4 + index * 0.1 }}
+                transition={{ delay: 1.6 + index * 0.1 }}
               >
-                <social.icon className="w-6 h-6 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                <social.icon className="w-6 h-6 text-gray-400 group-hover:text-green-400 transition-colors" />
               </motion.a>
             ))}
-          </motion.div>
-
-          {/* LeetCode Link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
-          >
-            <a
-              href="https://leetcode.com/u/perumalhacks/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-medium transition-colors"
-            >
-              <span className="font-mono">LeetCode Profile</span>
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-                <path d="M8.5 9.5h3v5h-3z"/>
-                <path d="M12.5 9.5h3v1.5h-3z"/>
-                <path d="M12.5 12.5h3v2h-3z"/>
-              </svg>
-            </a>
           </motion.div>
         </motion.div>
 
@@ -199,8 +209,8 @@ const HeroSection: React.FC = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center">
-            <div className="w-1 h-2 bg-gray-400 dark:bg-gray-600 rounded-full mt-2 animate-bounce" />
+          <div className="w-6 h-10 border-2 border-green-500 rounded-full flex justify-center">
+            <div className="w-1 h-2 bg-green-500 rounded-full mt-2 animate-bounce" />
           </div>
         </motion.div>
       </div>

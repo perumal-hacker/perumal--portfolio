@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Filter } from 'lucide-react';
+import { Filter, Code, Brain, Database, Zap } from 'lucide-react';
 
 const SkillsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -30,7 +30,7 @@ const SkillsSection: React.FC = () => {
         color: 'from-blue-500 to-blue-700'
       },
       { 
-        name: 'CSS/Tailwind', 
+        name: 'Tailwind CSS', 
         icon: '🎨', 
         level: 85, 
         achievement: 'Responsive Design',
@@ -60,14 +60,14 @@ const SkillsSection: React.FC = () => {
         color: 'from-green-500 to-green-700'
       },
       { 
-        name: 'SQL/MySQL', 
+        name: 'MySQL', 
         icon: '🗃️', 
         level: 80, 
         achievement: 'Query Optimization',
         color: 'from-blue-500 to-blue-700'
       },
     ],
-    'Programming Languages': [
+    'Programming': [
       { 
         name: 'Java', 
         icon: '☕', 
@@ -90,7 +90,7 @@ const SkillsSection: React.FC = () => {
         color: 'from-indigo-400 to-purple-600'
       },
     ],
-    'CS Fundamentals': [
+    'DSA & Problem Solving': [
       { 
         name: 'Data Structures', 
         icon: '🧠', 
@@ -106,23 +106,23 @@ const SkillsSection: React.FC = () => {
         color: 'from-yellow-500 to-orange-600'
       },
       { 
+        name: 'LeetCode', 
+        icon: '🎯', 
+        level: 85, 
+        achievement: '300+ Problems Solved',
+        color: 'from-green-400 to-green-600'
+      },
+      { 
         name: 'System Design', 
         icon: '🏗️', 
         level: 75, 
         achievement: 'Scalable Solutions',
         color: 'from-teal-400 to-teal-600'
       },
-      { 
-        name: 'Database Design', 
-        icon: '💾', 
-        level: 82, 
-        achievement: 'Normalization Expert',
-        color: 'from-indigo-400 to-indigo-600'
-      },
     ]
   };
 
-  const filterOptions = ['All', 'Frontend', 'Backend', 'Programming Languages', 'CS Fundamentals'];
+  const filterOptions = ['All', 'Frontend', 'Backend', 'Programming', 'DSA & Problem Solving'];
 
   const getFilteredSkills = () => {
     if (activeFilter === 'All') {
@@ -136,7 +136,7 @@ const SkillsSection: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="section-padding bg-gray-950 dark:bg-gray-950">
+    <section id="skills" className="section-padding bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -145,13 +145,54 @@ const SkillsSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
-            Skills & Expertise
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 font-mono">
+            Technical Arsenal
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-purple-400 mx-auto mb-6" />
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            Comprehensive technical skills developed through hands-on projects and continuous learning
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto font-mono">
+            Comprehensive skill set forged through hands-on development and continuous problem-solving
           </p>
+        </motion.div>
+
+        {/* Special DSA + LeetCode Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <div className="bg-gradient-to-r from-green-900/50 to-blue-900/50 border border-green-500/30 rounded-xl p-8 max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex items-center gap-4">
+                <div className="p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-xl">
+                  <Brain className="w-8 h-8 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white font-mono">DSA + LeetCode Mastery</h3>
+                  <p className="text-gray-300 font-mono">300+ Problems Solved | Advanced Problem Solving</p>
+                </div>
+              </div>
+              <div className="flex gap-4 ml-auto">
+                <a
+                  href="https://leetcode.com/u/perumalhacks/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 font-mono font-medium"
+                >
+                  View LeetCode Profile
+                </a>
+                <a
+                  href="https://github.com/perumal-hacker#readme"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-gray-800 border border-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all duration-300 font-mono font-medium"
+                >
+                  GitHub README
+                </a>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Filter Buttons */}
@@ -166,10 +207,10 @@ const SkillsSection: React.FC = () => {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 ${
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 font-mono ${
                 activeFilter === filter
                   ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
+                  : 'bg-gray-900 text-gray-300 hover:bg-gray-800 border border-gray-700 hover:border-green-500/50'
               }`}
             >
               <Filter className="w-4 h-4" />
@@ -187,23 +228,23 @@ const SkillsSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-green-500/50 transition-all duration-300 group"
+              className="group bg-gray-900/50 border border-gray-700 hover:border-green-500/50 rounded-xl p-6 transition-all duration-300 backdrop-blur-sm"
             >
               <div className="flex items-center gap-4 mb-4">
                 <span className="text-3xl">{skill.icon}</span>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors font-mono">
                     {skill.name}
                   </h3>
-                  <p className="text-sm text-gray-400">{skill.category}</p>
+                  <p className="text-sm text-gray-400 font-mono">{skill.category}</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-green-400">{skill.level}%</div>
-                  <div className="text-xs text-gray-400">Proficiency</div>
+                  <div className="text-2xl font-bold text-green-400 font-mono">{skill.level}%</div>
+                  <div className="text-xs text-gray-400 font-mono">Proficiency</div>
                 </div>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
                   <motion.div
                     className={`h-full bg-gradient-to-r ${skill.color} rounded-full relative`}
@@ -217,56 +258,62 @@ const SkillsSection: React.FC = () => {
                 </div>
                 
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-400">Achievement</span>
-                  <span className="text-green-400 font-medium">🚀 {skill.achievement}</span>
+                  <span className="text-gray-400 font-mono">Achievement</span>
+                  <span className="text-green-400 font-medium font-mono">🚀 {skill.achievement}</span>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Category Overview */}
-        {activeFilter === 'All' && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-16 grid md:grid-cols-2 lg:grid-cols-2 gap-8"
-          >
-            <div className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-500/30 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                💻 Full-Stack Development
-              </h3>
-              <p className="text-gray-300 mb-4">
-                Proficient in modern web technologies including React ecosystem, Node.js backend, and database management.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {[...skillCategories['Frontend'], ...skillCategories['Backend']].slice(0, 4).map((skill) => (
-                  <span key={skill.name} className="px-3 py-1 bg-blue-600/30 text-blue-300 rounded-full text-sm">
-                    {skill.icon} {skill.name}
-                  </span>
-                ))}
+        {/* Summary Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-16 grid md:grid-cols-2 gap-8"
+        >
+          <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 border border-blue-500/30 rounded-xl p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Code className="w-8 h-8 text-blue-400" />
+              <h3 className="text-2xl font-bold text-white font-mono">Full-Stack Mastery</h3>
+            </div>
+            <p className="text-gray-300 mb-6 font-mono">
+              End-to-end development expertise from database design to responsive frontend interfaces.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-400 font-mono">10+</div>
+                <div className="text-sm text-gray-400 font-mono">Projects Built</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400 font-mono">MERN</div>
+                <div className="text-sm text-gray-400 font-mono">Stack Expert</div>
               </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-green-900/50 to-teal-900/50 border border-green-500/30 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                🧠 Computer Science & Problem Solving
-              </h3>
-              <p className="text-gray-300 mb-4">
-                Strong foundation in algorithms, data structures, and competitive programming with proven problem-solving skills.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {[...skillCategories['Programming Languages'], ...skillCategories['CS Fundamentals']].slice(0, 4).map((skill) => (
-                  <span key={skill.name} className="px-3 py-1 bg-green-600/30 text-green-300 rounded-full text-sm">
-                    {skill.icon} {skill.name}
-                  </span>
-                ))}
+          </div>
+          
+          <div className="bg-gradient-to-br from-green-900/30 to-teal-900/30 border border-green-500/30 rounded-xl p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Brain className="w-8 h-8 text-green-400" />
+              <h3 className="text-2xl font-bold text-white font-mono">Problem Solving Elite</h3>
+            </div>
+            <p className="text-gray-300 mb-6 font-mono">
+              Advanced algorithmic thinking with proven track record in competitive programming.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400 font-mono">300+</div>
+                <div className="text-sm text-gray-400 font-mono">LeetCode Solved</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-400 font-mono">DSA</div>
+                <div className="text-sm text-gray-400 font-mono">Expert Level</div>
               </div>
             </div>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
