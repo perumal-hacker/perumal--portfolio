@@ -1,10 +1,20 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Github, Linkedin, Mail, Download, ArrowDown, Code, Terminal } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
+  const [showTerminal, setShowTerminal] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTerminal(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const socialLinks = [
     { icon: Github, href: 'https://github.com/perumal-hacker', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/perumal-s-dev', label: 'LinkedIn' },
@@ -58,28 +68,49 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
-          {/* Terminal-style introduction */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-lg p-6 font-mono text-left max-w-2xl mx-auto mb-8 shadow-xl"
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span className="text-gray-500 dark:text-gray-400 text-sm">~/portfolio</span>
-            </div>
-            <div className="space-y-2 text-sm">
-              <div className="text-blue-600 dark:text-green-400">$ whoami</div>
-              <div className="text-gray-800 dark:text-white">Perumal S - Full Stack Developer</div>
-              <div className="text-blue-600 dark:text-green-400">$ echo $EXPERTISE</div>
-              <div className="text-gray-800 dark:text-white">MERN Stack | DSA | Problem Solving | 300+ LeetCode</div>
-            </div>
-          </motion.div>
+          {/* Terminal-style introduction that disappears */}
+          <AnimatePresence>
+            {showTerminal && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.8 }}
+                className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-lg p-6 font-mono text-left max-w-2xl mx-auto mb-8 shadow-xl"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="text-gray-500 dark:text-gray-400 text-sm">~/portfolio</span>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="text-blue-600 dark:text-green-400">$ whoami</div>
+                  <div className="text-gray-800 dark:text-white">Perumal S - Full Stack Developer</div>
+                  <div className="text-blue-600 dark:text-green-400">$ echo $EXPERTISE</div>
+                  <div className="text-gray-800 dark:text-white">MERN Stack | DSA | Problem Solving | 300+ LeetCode</div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Tagline that appears after terminal disappears */}
+          <AnimatePresence>
+            {!showTerminal && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="max-w-4xl mx-auto mb-8"
+              >
+                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-mono">
+                  I'm a final-year Computer Science Engineering student passionate about full-stack development and problem solving.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Main heading */}
           <div className="space-y-6">
@@ -164,6 +195,18 @@ const HeroSection: React.FC = () => {
               View Projects
               <ArrowDown className="w-5 h-5" />
             </motion.button>
+            
+            <motion.a
+              href="https://leetcode.com/u/perumalhacks/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 border-2 border-orange-500 dark:border-yellow-500 text-orange-600 dark:text-yellow-400 hover:bg-orange-500 hover:text-white dark:hover:bg-yellow-500 dark:hover:text-black rounded-lg font-semibold text-lg transition-all duration-300 flex items-center gap-2 font-mono backdrop-blur-sm"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Terminal className="w-5 h-5" />
+              View My LeetCode
+            </motion.a>
             
             <motion.a
               href="/resume.pdf"

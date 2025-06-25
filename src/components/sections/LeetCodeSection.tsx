@@ -19,7 +19,7 @@ const LeetCodeSection: React.FC = () => {
 
   if (leetcodeStats.loading || githubStats.loading) {
     return (
-      <section id="leetcode" className="section-padding bg-gray-50 dark:bg-black">
+      <section id="leetcode" className="section-padding bg-white dark:bg-gray-950">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-6 font-mono">
@@ -29,7 +29,7 @@ const LeetCodeSection: React.FC = () => {
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 animate-pulse">
+              <Card key={i} className="bg-white dark:bg-gray-900 backdrop-blur-sm border-gray-200 dark:border-gray-700 animate-pulse">
                 <CardContent className="p-6">
                   <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
                   <div className="h-32 bg-gray-300 dark:bg-gray-700 rounded"></div>
@@ -43,7 +43,7 @@ const LeetCodeSection: React.FC = () => {
   }
 
   return (
-    <section id="leetcode" className="section-padding bg-gray-50 dark:bg-black">
+    <section id="leetcode" className="section-padding bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
