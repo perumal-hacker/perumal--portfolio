@@ -3,6 +3,9 @@ import React from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import Navigation from '@/components/Navigation';
 import ThemeToggle from '@/components/ThemeToggle';
+import CursorTrail from '@/components/effects/CursorTrail';
+import CommandPalette from '@/components/CommandPalette';
+import NowBuildingWidget from '@/components/NowBuildingWidget';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import SkillsSection from '@/components/sections/SkillsSection';
@@ -13,9 +16,12 @@ import CertificationsSection from '@/components/sections/CertificationsSection';
 const Index = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800 text-gray-900 dark:text-white">
+        <CursorTrail />
         <Navigation />
         <ThemeToggle />
+        <CommandPalette />
+        <NowBuildingWidget />
         
         <main>
           <HeroSection />
@@ -24,13 +30,13 @@ const Index = () => {
           <ProjectsSection />
           <LeetCodeSection />
 
-          {/* Education Section */}
-          <section id="education" className="section-padding bg-gray-50 dark:bg-gray-900">
+          {/* Enhanced Education Section */}
+          <section id="education" className="section-padding bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
                 Education
               </h2>
-              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-8 rounded-2xl max-w-2xl mx-auto transition-all duration-300 shadow-lg">
+              <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-8 rounded-2xl max-w-2xl mx-auto transition-all duration-300 shadow-xl">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-mono">
                   K S Rangasamy College of Technology
                 </h3>
@@ -47,13 +53,13 @@ const Index = () => {
           <CertificationsSection />
 
           {/* Enhanced Achievements Section */}
-          <section id="achievements" className="section-padding bg-white dark:bg-black">
+          <section id="achievements" className="section-padding bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
                 Achievements
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-8 rounded-2xl transition-all duration-300 group shadow-lg">
+                <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-8 rounded-2xl transition-all duration-300 group shadow-xl hover:shadow-2xl">
                   <div className="text-4xl mb-4">🏆</div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 font-mono group-hover:text-blue-600 dark:group-hover:text-green-400 transition-colors">
                     Hackathon Participation
@@ -64,7 +70,7 @@ const Index = () => {
                   </ul>
                 </div>
                 
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500/50 p-8 rounded-2xl transition-all duration-300 group shadow-lg">
+                <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500/50 p-8 rounded-2xl transition-all duration-300 group shadow-xl hover:shadow-2xl">
                   <div className="text-4xl mb-4">🎯</div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 font-mono group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                     Problem Solving Excellence
@@ -76,7 +82,7 @@ const Index = () => {
                   </ul>
                 </div>
                 
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500/50 p-8 rounded-2xl transition-all duration-300 group shadow-lg">
+                <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500/50 p-8 rounded-2xl transition-all duration-300 group shadow-xl hover:shadow-2xl">
                   <div className="text-4xl mb-4">💻</div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 font-mono group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     Development Milestones
@@ -91,8 +97,8 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Contact Section */}
-          <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-950">
+          {/* Enhanced Contact Section */}
+          <section id="contact" className="section-padding bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
                 Get In Touch
@@ -101,7 +107,7 @@ const Index = () => {
                 Ready to collaborate on innovative projects? Let's build something amazing together.
               </p>
               
-              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-8 rounded-2xl transition-all duration-300 shadow-lg">
+              <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-8 rounded-2xl transition-all duration-300 shadow-xl">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 font-mono">Contact Information</h3>
@@ -157,8 +163,8 @@ const Index = () => {
           </section>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white py-12">
+        {/* Enhanced Footer */}
+        <footer className="bg-white/80 dark:bg-black/80 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-gray-600 dark:text-gray-400 font-mono">
               © 2024 Perumal S. Crafted with passion and precision.
