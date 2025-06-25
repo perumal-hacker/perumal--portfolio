@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code } from 'lucide-react';
@@ -34,6 +33,14 @@ const LeetCodeProfile: React.FC<LeetCodeProfileProps> = ({ totalSolved }) => {
             </div>
             <div className="text-3xl font-bold text-blue-600 dark:text-green-400 font-mono">{totalSolved}</div>
             <div className="text-sm text-gray-600 dark:text-gray-400 font-mono">Problems Solved</div>
+            <a
+              href="https://leetcode.com/u/perumalhacks/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-3 text-sm text-blue-600 dark:text-green-400 underline font-mono"
+            >
+              View Full Profile
+            </a>
           </div>
         </CardContent>
       </Card>
