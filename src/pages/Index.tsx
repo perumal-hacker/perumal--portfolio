@@ -3,10 +3,9 @@ import React from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import Navigation from '@/components/Navigation';
 import ThemeToggle from '@/components/ThemeToggle';
-import DeveloperCursor from '@/components/effects/DeveloperCursor';
+import CursorTrail from '@/components/effects/CursorTrail';
 import CommandPalette from '@/components/CommandPalette';
-import NowBuildingEnhanced from '@/components/NowBuildingEnhanced';
-import PortfolioViewCounter from '@/components/PortfolioViewCounter';
+import NowBuildingWidget from '@/components/NowBuildingWidget';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import SkillsSection from '@/components/sections/SkillsSection';
@@ -18,20 +17,11 @@ const Index = () => {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800 text-gray-900 dark:text-white">
-        <DeveloperCursor />
+        <CursorTrail />
         <Navigation />
         <ThemeToggle />
         <CommandPalette />
-        
-        {/* Enhanced Now Building Widget */}
-        <div className="fixed bottom-6 right-6 z-40 hidden lg:block">
-          <NowBuildingEnhanced />
-        </div>
-
-        {/* Portfolio View Counter */}
-        <div className="fixed bottom-6 left-6 z-40">
-          <PortfolioViewCounter />
-        </div>
+        <NowBuildingWidget />
         
         <main>
           <HeroSection />
