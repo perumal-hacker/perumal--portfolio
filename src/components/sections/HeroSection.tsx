@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
   const downloadResume = () => {
     // Create a link element and trigger download
     const link = document.createElement('a');
-    link.href = '/lovable-uploads/4505cc12-63b4-4a1f-8f15-2ca4596cf1d4.png';
+    link.href = '/lovable-uploads/Perumal_Resume.pdf';
     link.download = 'Perumal Resume.pdf';
     document.body.appendChild(link);
     link.click();
