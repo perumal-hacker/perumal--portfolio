@@ -1,10 +1,20 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Code, Database, Smartphone } from 'lucide-react';
 
 const ProjectsSection: React.FC = () => {
   const projects = [
+    {
+      title: 'Face Recognition Attendance System',
+      description: 'Advanced attendance management system using OpenCV and Python for real-time face recognition. Features automated attendance tracking, employee database management, and comprehensive reporting dashboard.',
+      technologies: ['Python', 'OpenCV', 'NumPy', 'Pandas', 'SQLite', 'Tkinter'],
+      github: 'https://github.com/perumal-hacker/Face_recogntion_attendence',
+      demo: null,
+      gradient: 'from-emerald-500 to-teal-600',
+      image: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=800&h=400',
+      category: 'AI/ML',
+      highlights: ['Face Recognition', 'Real-time Processing', 'Database Integration']
+    },
     {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with JWT authentication, payment integration, and comprehensive admin dashboard. Features 50+ product listings and dynamic shopping cart.',
@@ -79,7 +89,13 @@ const ProjectsSection: React.FC = () => {
       'HTML5': '📄',
       'CSS3': '🎨',
       'Tailwind': '💨',
-      'LocalStorage': '💾'
+      'LocalStorage': '💾',
+      'Python': '🐍',
+      'OpenCV': '👁️',
+      'NumPy': '🔢',
+      'Pandas': '🐼',
+      'SQLite': '🗄️',
+      'Tkinter': '🖼️'
     };
     return icons[tech] || '⚙️';
   };
