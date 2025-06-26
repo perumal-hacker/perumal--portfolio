@@ -9,7 +9,7 @@ const ProjectsSection: React.FC = () => {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with JWT authentication, payment integration, and comprehensive admin dashboard. Features 50+ product listings and dynamic shopping cart.',
       technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Stripe API'],
-      github: 'https://github.com/perumal-hacker/ecommerce-app',
+      github: 'https://github.com/perumal-hacker/MERN_Stack_Project_Ecommerce',
       demo: null,
       gradient: 'from-blue-500 to-purple-600',
       image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=800&h=400',
@@ -20,12 +20,23 @@ const ProjectsSection: React.FC = () => {
       title: 'Real-Time Chat Application',
       description: 'MERN stack messaging platform with socket.io integration, real-time messaging, chat history persistence, and responsive design across all devices.',
       technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express.js', 'CSS3'],
-      github: 'https://github.com/perumal-hacker/mern-chat',
+      github: 'https://github.com/perumal-hacker/mern-chat-app',
       demo: null,
       gradient: 'from-green-500 to-blue-600',
       image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&q=80&w=800&h=400',
       category: 'Real-Time',
       highlights: ['WebSocket', 'Real-time Messaging', 'Chat History']
+    },
+    {
+      title: 'Attendance-Based Management System',
+      description: 'Face recognition-based system for recording attendance using OpenCV and Python. Features automated face detection, attendance tracking, and data management with high accuracy.',
+      technologies: ['Python', 'OpenCV', 'Face Recognition', 'Pandas', 'NumPy', 'Tkinter'],
+      github: 'https://github.com/perumal-hacker/Face_recogntion_attendence',
+      demo: null,
+      gradient: 'from-purple-500 to-pink-600',
+      image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=800&h=400',
+      category: 'AI/ML',
+      highlights: ['Face Recognition', 'Automated Attendance', 'Data Management']
     },
     {
       title: 'User Management System',
@@ -42,7 +53,7 @@ const ProjectsSection: React.FC = () => {
       title: 'Chrome Theme Extension',
       description: 'Browser extension with CSS injection capabilities for dynamic theme switching. Features dark/light mode toggle across websites with local storage.',
       technologies: ['JavaScript', 'HTML5', 'CSS3', 'Chrome APIs', 'LocalStorage'],
-      github: 'https://github.com/perumal-hacker/chrome-theme-toggle',
+      github: 'https://github.com/perumal-hacker/ChromeExtension',
       demo: null,
       gradient: 'from-purple-500 to-pink-600',
       image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=800&h=400',
@@ -79,7 +90,13 @@ const ProjectsSection: React.FC = () => {
       'HTML5': '📄',
       'CSS3': '🎨',
       'Tailwind': '💨',
-      'LocalStorage': '💾'
+      'LocalStorage': '💾',
+      'Python': '🐍',
+      'OpenCV': '👁️',
+      'Face Recognition': '🤖',
+      'Pandas': '🐼',
+      'NumPy': '🔢',
+      'Tkinter': '🖼️'
     };
     return icons[tech] || '⚙️';
   };

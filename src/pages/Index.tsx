@@ -6,6 +6,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import CursorTrail from '@/components/effects/CursorTrail';
 import CommandPalette from '@/components/CommandPalette';
 import NowBuildingWidget from '@/components/NowBuildingWidget';
+import PortfolioViewCounter from '@/components/PortfolioViewCounter';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import SkillsSection from '@/components/sections/SkillsSection';
@@ -22,6 +23,7 @@ const Index = () => {
         <ThemeToggle />
         <CommandPalette />
         <NowBuildingWidget />
+        <PortfolioViewCounter />
         
         <main>
           <HeroSection />

@@ -25,6 +25,16 @@ const HeroSection: React.FC = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const downloadResume = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/lovable-uploads/4505cc12-63b4-4a1f-8f15-2ca4596cf1d4.png';
+    link.download = 'Perumal Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800">
       {/* Enhanced animated background */}
@@ -246,16 +256,15 @@ const HeroSection: React.FC = () => {
               <ExternalLink className="w-4 h-4" />
             </motion.a>
             
-            <motion.a
-              href="/resume.pdf"
-              download
+            <motion.button
+              onClick={downloadResume}
               className="px-8 py-4 border-2 border-blue-500 dark:border-green-500 text-blue-600 dark:text-green-400 hover:bg-blue-500 hover:text-white dark:hover:bg-green-500 dark:hover:text-black rounded-lg font-semibold text-lg transition-all duration-300 flex items-center gap-2 font-mono backdrop-blur-sm shadow-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               <Download className="w-5 h-5" />
               Download Resume
-            </motion.a>
+            </motion.button>
           </motion.div>
 
           {/* Enhanced Social Links */}

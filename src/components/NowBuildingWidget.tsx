@@ -7,11 +7,10 @@ const NowBuildingWidget: React.FC = () => {
   const [currentProject, setCurrentProject] = useState(0);
   
   const projects = [
-    "Advanced MERN Stack E-commerce Platform",
-    "Real-time Chat Application with WebSocket",
-    "AI-powered Code Review Tool",
-    "Distributed System Architecture",
-    "Advanced Database Optimization Techniques"
+    "Database Management Systems",
+    "Operating Systems",
+    "Computer Networks",
+    "Computer Systems"
   ];
 
   useEffect(() => {
