@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Zap } from 'lucide-react';
@@ -9,7 +10,7 @@ const NowBuildingWidget: React.FC = () => {
     "Database Management Systems",
     "Operating Systems",
     "Computer Networks",
-    "System Design"
+    "Computer Systems"
   ];
 
   useEffect(() => {
