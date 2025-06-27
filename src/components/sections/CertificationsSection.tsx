@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Award, ChevronDown, ChevronUp, Eye } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Award, Eye, X } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const CertificationsSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const certifications = [
     {
@@ -75,101 +76,99 @@ const CertificationsSection: React.FC = () => {
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
             Professional certifications and course completions that showcase my commitment to continuous learning and skill development.
           </p>
-          
-          {/* Toggle Button */}
-          <motion.button
-            onClick={() => setIsVisible(!isVisible)}
-            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-green-600 dark:to-blue-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 dark:hover:from-green-700 dark:hover:to-blue-700 transition-all duration-300 font-medium shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Eye className="w-5 h-5" />
-            {isVisible ? 'Hide Certifications' : 'View Certifications'}
-            {isVisible ? (
-              <ChevronUp className="w-5 h-5" />
-            ) : (
-              <ChevronDown className="w-5 h-5" />
-            )}
-          </motion.button>
         </motion.div>
 
-        <AnimatePresence>
-          {isVisible && (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certifications.map((cert, index) => (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="overflow-hidden"
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group"
             >
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
-                {certifications.map((cert, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    className="group"
-                  >
-                    <Card className="glass glass-dark h-full overflow-hidden">
-                      <div className="aspect-[4/3] overflow-hidden">
-                        <img
-                          src={cert.image}
-                          alt={cert.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-3 mb-4">
-                          <Award className="w-6 h-6 text-yellow-500 mt-1 flex-shrink-0" />
-                          <div>
-                            <h3 className="font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">
-                              {cert.title}
-                            </h3>
-                            <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1">
-                              {cert.provider}
-                            </p>
-                            {cert.instructor && (
-                              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                                Instructor: {cert.instructor}
-                              </p>
-                            )}
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                              {cert.date}
-                            </p>
-                            {cert.duration && (
-                              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                                Duration: {cert.duration}
-                              </p>
-                            )}
-                            {cert.score && (
-                              <p className="text-sm font-semibold text-green-600 dark:text-green-400">
-                                Score: {cert.score}
-                              </p>
-                            )}
-                          </div>
-                        </div>
+              <Card className="glass glass-dark h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-3 mb-4">
+                    <Award className="w-6 h-6 text-yellow-500 mt-1 flex-shrink-0" />
+                    <div className="flex-1">
+                      <h3 className="font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                        {cert.title}
+                      </h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1">
+                        {cert.provider}
+                      </p>
+                      {cert.instructor && (
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                          Instructor: {cert.instructor}
+                        </p>
+                      )}
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                        {cert.date}
+                      </p>
+                      {cert.duration && (
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                          Duration: {cert.duration}
+                        </p>
+                      )}
+                      {cert.score && (
+                        <p className="text-sm font-semibold text-green-600 dark:text-green-400 mb-3">
+                          Score: {cert.score}
+                        </p>
+                      )}
+                      
+                      {/* Preview Button */}
+                      <Button
+                        onClick={() => setPreviewImage(cert.image)}
+                        variant="outline"
+                        size="sm"
+                        className="mb-4"
+                      >
+                        <Eye className="w-4 h-4 mr-2" />
+                        Preview Certificate
+                      </Button>
+                    </div>
+                  </div>
 
-                        {/* Skills */}
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {cert.skills.map((skill, skillIndex) => (
-                            <span
-                              key={skillIndex}
-                              className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-2">
+                    {cert.skills.map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
-          )}
-        </AnimatePresence>
+          ))}
+        </div>
+
+        {/* Image Preview Modal */}
+        {previewImage && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="relative max-w-4xl max-h-[90vh] w-full">
+              <Button
+                onClick={() => setPreviewImage(null)}
+                variant="ghost"
+                size="icon"
+                className="absolute -top-12 right-0 text-white hover:bg-white/20"
+              >
+                <X className="w-6 h-6" />
+              </Button>
+              <img
+                src={previewImage}
+                alt="Certificate Preview"
+                className="w-full h-full object-contain rounded-lg"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
