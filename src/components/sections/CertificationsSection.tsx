@@ -1,10 +1,12 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Award } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Award, ChevronDown, ChevronUp, Eye } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const CertificationsSection: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
   const certifications = [
     {
       title: 'Full Stack Web Development MASTERY Course - Novice to Expert',
@@ -66,81 +68,108 @@ const CertificationsSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">Certifications</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6" />
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
             Professional certifications and course completions that showcase my commitment to continuous learning and skill development.
           </p>
+          
+          {/* Toggle Button */}
+          <motion.button
+            onClick={() => setIsVisible(!isVisible)}
+            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-green-600 dark:to-blue-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 dark:hover:from-green-700 dark:hover:to-blue-700 transition-all duration-300 font-medium shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Eye className="w-5 h-5" />
+            {isVisible ? 'Hide Certifications' : 'View Certifications'}
+            {isVisible ? (
+              <ChevronUp className="w-5 h-5" />
+            ) : (
+              <ChevronDown className="w-5 h-5" />
+            )}
+          </motion.button>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certifications.map((cert, index) => (
+        <AnimatePresence>
+          {isVisible && (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="group"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              className="overflow-hidden"
             >
-              <Card className="glass glass-dark h-full overflow-hidden">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={cert.image}
-                    alt={cert.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3 mb-4">
-                    <Award className="w-6 h-6 text-yellow-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">
-                        {cert.title}
-                      </h3>
-                      <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1">
-                        {cert.provider}
-                      </p>
-                      {cert.instructor && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                          Instructor: {cert.instructor}
-                        </p>
-                      )}
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                        {cert.date}
-                      </p>
-                      {cert.duration && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                          Duration: {cert.duration}
-                        </p>
-                      )}
-                      {cert.score && (
-                        <p className="text-sm font-semibold text-green-600 dark:text-green-400">
-                          Score: {cert.score}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
+                {certifications.map((cert, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                    className="group"
+                  >
+                    <Card className="glass glass-dark h-full overflow-hidden">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-3 mb-4">
+                          <Award className="w-6 h-6 text-yellow-500 mt-1 flex-shrink-0" />
+                          <div>
+                            <h3 className="font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                              {cert.title}
+                            </h3>
+                            <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1">
+                              {cert.provider}
+                            </p>
+                            {cert.instructor && (
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                                Instructor: {cert.instructor}
+                              </p>
+                            )}
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                              {cert.date}
+                            </p>
+                            {cert.duration && (
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                                Duration: {cert.duration}
+                              </p>
+                            )}
+                            {cert.score && (
+                              <p className="text-sm font-semibold text-green-600 dark:text-green-400">
+                                Score: {cert.score}
+                              </p>
+                            )}
+                          </div>
+                        </div>
 
-                  {/* Skills */}
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {cert.skills.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                        {/* Skills */}
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {cert.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
