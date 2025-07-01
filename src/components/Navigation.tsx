@@ -56,7 +56,7 @@ const Navigation: React.FC = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200/20 dark:border-gray-700/20' 
           : 'bg-transparent'
@@ -103,7 +103,7 @@ const Navigation: React.FC = () => {
 
           {/* Mobile menu button */}
           <motion.button
-            className="md:hidden text-gray-600 dark:text-gray-300 p-2 z-50"
+            className="md:hidden text-gray-600 dark:text-gray-300 p-2 z-30"
             onClick={toggleMobileMenu}
             whileTap={{ scale: 0.95 }}
           >
