@@ -66,7 +66,7 @@ const Navigation: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-4 pr-16 md:pr-4">
           <motion.div
             className="text-xl sm:text-2xl font-bold gradient-text font-mono"
             whileHover={{ scale: 1.05 }}
@@ -103,7 +103,7 @@ const Navigation: React.FC = () => {
 
           {/* Mobile menu button */}
           <motion.button
-            className="md:hidden text-gray-600 dark:text-gray-300 p-2"
+            className="md:hidden text-gray-600 dark:text-gray-300 p-2 z-50"
             onClick={toggleMobileMenu}
             whileTap={{ scale: 0.95 }}
           >
