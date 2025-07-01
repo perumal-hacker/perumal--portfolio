@@ -87,8 +87,39 @@ const Navigation: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
+          {/* Mobile menu button - moved to left */}
+          <motion.button
+            className="md:hidden text-gray-600 dark:text-gray-300 p-2 z-50 relative"
+            onClick={toggleMobileMenu}
+            whileTap={{ scale: 0.95 }}
+          >
+            <AnimatePresence mode="wait">
+              {isMobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-6 h-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="w-6 h-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
           <motion.div
-            className="text-xl sm:text-2xl font-bold gradient-text font-mono z-50"
+            className="text-xl sm:text-2xl font-bold gradient-text font-mono z-50 flex-1 text-center md:text-left md:flex-none"
             whileHover={{ scale: 1.05 }}
           >
             Perumal S
@@ -120,37 +151,6 @@ const Navigation: React.FC = () => {
               </motion.button>
             ))}
           </div>
-
-          {/* Mobile menu button */}
-          <motion.button
-            className="md:hidden text-gray-600 dark:text-gray-300 p-2 z-50 relative"
-            onClick={toggleMobileMenu}
-            whileTap={{ scale: 0.95 }}
-          >
-            <AnimatePresence mode="wait">
-              {isMobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-6 h-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-6 h-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
         </div>
 
         {/* Mobile Navigation Menu */}
