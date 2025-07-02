@@ -173,7 +173,7 @@ const Index = () => {
         <footer className="bg-white/80 dark:bg-black/80 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white py-8 sm:py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-mono">
-              © 2024 Perumal S. Crafted with passion and precision.
+              © 2025 Perumal S. Crafted with passion and precision.
             </p>
           </div>
         </footer>
