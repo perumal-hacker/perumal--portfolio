@@ -122,7 +122,7 @@ const HeroSection: React.FC = () => {
                     transition={{ delay: 2 }}
                     className="text-gray-800 dark:text-white"
                   >
-                    MERN Stack | DSA | Problem Solving | 300+ LeetCode
+                    MERN Stack | DSA | Problem Solving | 400+ LeetCode
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0 }}

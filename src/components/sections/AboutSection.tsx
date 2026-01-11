@@ -13,7 +13,7 @@ const AboutSection: React.FC = () => {
     {
       icon: Brain,
       title: 'Problem Solver',
-      description: '300+ LeetCode problems solved with strong DSA foundation'
+      description: '400+ LeetCode problems solved with strong DSA foundation'
     },
     {
       icon: Database,
