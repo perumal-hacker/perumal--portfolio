@@ -216,7 +216,7 @@ const HeroSection: React.FC = () => {
               whileHover={{ scale: 1.05, y: -2 }}
             >
               <Terminal className="w-4 h-4" />
-              300+ LeetCode
+              400+ LeetCode
             </motion.div>
             <motion.div 
               className="px-4 py-2 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-indigo-200 dark:border-purple-500/30 text-indigo-600 dark:text-purple-400 rounded-lg text-sm font-mono shadow-lg"
