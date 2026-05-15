@@ -67,14 +67,6 @@ const Index = () => {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href="https://github.com/perumal-hacker/Vendor-Management"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    View Vendor Management Project →
-                  </a>
                 </div>
               </div>
             </div>

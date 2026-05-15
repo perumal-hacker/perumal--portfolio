@@ -137,7 +137,7 @@ const HeroSection: React.FC = () => {
           <span>•</span>
           <span>CGPA 8.5</span>
           <span>•</span>
-          <span>React · Node · Java · Spring Boot</span>
+          <span>React · Node · Java FSD · Spring Boot</span>
         </motion.div>
       </div>
     </section>
