@@ -28,6 +28,35 @@ const Index = () => {
         <main>
           <HeroSection />
           <AboutSection />
+
+          {/* Experience Section */}
+          <section id="experience" className="section-padding bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800">
+            <div className="max-w-7xl mx-auto text-center px-4">
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
+                Experience
+              </h2>
+              <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-6 sm:p-8 rounded-2xl max-w-3xl mx-auto transition-all duration-300 shadow-xl text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 font-mono">
+                  Trainee Associate Software Engineer
+                </h3>
+                <p className="text-base sm:text-lg text-blue-600 dark:text-green-400 font-semibold font-mono mb-4">
+                  Java Full Stack Developer
+                </p>
+                <p className="text-gray-600 dark:text-gray-300 font-mono mb-6">
+                  Gained hands-on experience in Java full stack development by building real-world projects during the internship. Worked on Vendor Management system using Java, Spring Boot, and modern frontend technologies.
+                </p>
+                <a
+                  href="https://github.com/perumal-hacker/Vendor-Management"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-green-600 dark:to-blue-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 dark:hover:from-green-700 dark:hover:to-blue-700 transition-all duration-300 font-mono font-medium shadow-lg"
+                >
+                  View Vendor Management Project
+                </a>
+              </div>
+            </div>
+          </section>
+
           <SkillsSection />
           <ProjectsSection />
           <LeetCodeSection />
