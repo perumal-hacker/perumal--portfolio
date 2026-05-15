@@ -98,7 +98,7 @@ const Index = () => {
                   Bachelor of Engineering - Computer Science and Engineering
                 </p>
                 <p className="text-blue-600 dark:text-green-400 font-semibold font-mono">
-                  2022 - 2026 | CGPA: 8.20
+                  2022 - 2026 | CGPA: 8.5
                 </p>
               </div>
             </div>
@@ -130,7 +130,7 @@ const Index = () => {
                     Problem Solving Excellence
                   </h3>
                   <ul className="space-y-2 text-sm sm:text-base text-gray-600 dark:text-gray-300 font-mono">
-                    <li>• <strong className="text-blue-600 dark:text-green-400">300+ LeetCode Problems</strong> Solved</li>
+                    <li>• <strong className="text-blue-600 dark:text-green-400">400+ LeetCode Problems</strong> Solved</li>
                     <li>• Advanced DSA Mastery</li>
                     <li>• Competitive Programming</li>
                   </ul>

@@ -79,7 +79,7 @@ const AboutSection: React.FC = () => {
               {/* Enhanced code snippet overlay */}
               <div className="absolute -bottom-4 -right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-blue-500/30 dark:border-green-500/30 rounded-lg p-3 font-mono text-xs text-blue-600 dark:text-green-400 shadow-xl">
                 <div>{'{'}</div>
-                <div className="ml-2">role: "Final-Year CSE Student",</div>
+                <div className="ml-2">role: "Full Stack Developer",</div>
                 <div className="ml-2">focus: "MERN + DSA + DBMS"</div>
                 <div>{'}'}</div>
               </div>
