@@ -17,7 +17,7 @@ import CertificationsSection from '@/components/sections/CertificationsSection';
 const Index = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800 text-gray-900 dark:text-white">
+      <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white">
         <CursorTrail />
         <Navigation />
         <ThemeToggle />
@@ -30,29 +30,52 @@ const Index = () => {
           <AboutSection />
 
           {/* Experience Section */}
-          <section id="experience" className="section-padding bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800">
-            <div className="max-w-7xl mx-auto text-center px-4">
-              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-8 font-mono">
-                Experience
-              </h2>
-              <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-green-500/50 p-6 sm:p-8 rounded-2xl max-w-3xl mx-auto transition-all duration-300 shadow-xl text-left">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 font-mono">
-                  Trainee Associate Software Engineer
-                </h3>
-                <p className="text-base sm:text-lg text-blue-600 dark:text-green-400 font-semibold font-mono mb-4">
-                  Java Full Stack Developer
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 font-mono mb-6">
-                  Gained hands-on experience in Java full stack development by building real-world projects during the internship. Worked on Vendor Management system using Java, Spring Boot, and modern frontend technologies.
-                </p>
-                <a
-                  href="https://github.com/perumal-hacker/Vendor-Management"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-green-600 dark:to-blue-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 dark:hover:from-green-700 dark:hover:to-blue-700 transition-all duration-300 font-mono font-medium shadow-lg"
-                >
-                  View Vendor Management Project
-                </a>
+          <section id="experience" className="py-24 px-6 bg-gray-50 dark:bg-[#0a0a0a]">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-14">
+                <p className="text-sm font-mono text-blue-600 dark:text-blue-400 mb-3">// Experience</p>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white" style={{ letterSpacing: '-0.03em' }}>
+                  Professional Journey
+                </h2>
+              </div>
+
+              <div className="relative pl-8 border-l-2 border-gray-200 dark:border-white/10">
+                <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 ring-4 ring-white dark:ring-[#0a0a0a]" />
+                <div className="bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-gray-300 dark:hover:border-white/20 transition-all">
+                  <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
+                        Trainee Associate Software Engineer
+                      </h3>
+                      <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mt-1">
+                        Java Full Stack Developer
+                      </p>
+                    </div>
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/10">
+                      Internship
+                    </span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                    Built enterprise-grade applications using Java, Spring Boot, REST APIs, and MySQL.
+                    Designed clean, layered backend architectures and shipped a production-style
+                    Vendor Management System.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {['Java', 'Spring Boot', 'REST APIs', 'MySQL', 'JPA'].map((t) => (
+                      <span key={t} className="text-xs px-2.5 py-1 rounded-md bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-white/10 font-mono">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href="https://github.com/perumal-hacker/Vendor-Management"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    View Vendor Management Project →
+                  </a>
+                </div>
               </div>
             </div>
           </section>
