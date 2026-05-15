@@ -7,38 +7,38 @@ const AboutSection: React.FC = () => {
   const highlights = [
     {
       icon: Code,
-      title: 'MERN Stack Specialist',
-      description: 'Expert in MongoDB, Express.js, React, and Node.js development'
+      title: 'Full Stack Engineering',
+      description: 'End-to-end product development across React, Node.js, Java, and Spring Boot'
     },
     {
       icon: Brain,
       title: 'Problem Solver',
-      description: '400+ LeetCode problems solved with strong DSA foundation'
+      description: '400+ LeetCode problems solved with a strong DSA foundation'
     },
     {
       icon: Database,
-      title: 'Database Expert',
-      description: 'Advanced DBMS knowledge and database optimization techniques'
+      title: 'Database Design',
+      description: 'Modeling and optimizing relational and NoSQL databases at scale'
     },
     {
       icon: Server,
       title: 'Backend Systems',
-      description: 'Scalable architectures, RESTful APIs, and microservices design'
+      description: 'Scalable REST APIs, clean architecture, and Spring Boot services'
     },
     {
       icon: Zap,
-      title: 'Modern Web Tech',
-      description: 'Latest frameworks, tools, and development methodologies'
+      title: 'Modern Web Stack',
+      description: 'React, Next.js, TypeScript, and modern tooling for fast delivery'
     },
     {
       icon: GitBranch,
-      title: 'Version Control',
-      description: 'Advanced Git workflows and collaborative development practices'
+      title: 'Engineering Discipline',
+      description: 'Git workflows, code reviews, and maintainable architecture'
     }
   ];
 
   return (
-    <section id="about" className="section-padding bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-gray-800">
+    <section id="about" className="py-24 px-6 bg-gray-50 dark:bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -79,7 +79,7 @@ const AboutSection: React.FC = () => {
               {/* Enhanced code snippet overlay */}
               <div className="absolute -bottom-4 -right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-blue-500/30 dark:border-green-500/30 rounded-lg p-3 font-mono text-xs text-blue-600 dark:text-green-400 shadow-xl">
                 <div>{'{'}</div>
-                <div className="ml-2">role: "Final-Year CSE Student",</div>
+                <div className="ml-2">role: "Full Stack Developer",</div>
                 <div className="ml-2">focus: "MERN + DSA + DBMS"</div>
                 <div>{'}'}</div>
               </div>
@@ -95,21 +95,29 @@ const AboutSection: React.FC = () => {
             className="space-y-8 order-1 lg:order-2"
           >
             <div className="space-y-6">
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-mono">
-                Final-Year CSE Student & Full-Stack Developer
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight" style={{ letterSpacing: '-0.02em' }}>
+                Full Stack Developer building scalable software
               </h3>
-              
-              {/* Enhanced professional highlights with terminal-style formatting */}
-              <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-lg p-6 font-mono text-sm shadow-lg">
-                <div className="text-blue-600 dark:text-green-400 mb-4">~/about-me$ cat profile.txt</div>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <div><span className="text-blue-500 dark:text-blue-400">▸</span> I'm a final-year Computer Science Engineering student with deep expertise in the MERN stack</div>
-                  <div><span className="text-green-500 dark:text-green-400">▸</span> Strong experience in DSA, backend development, and scalable software architecture</div>
-                  <div><span className="text-purple-500 dark:text-purple-400">▸</span> Solved 300+ problems on LeetCode with advanced problem-solving skills</div>
-                  <div><span className="text-yellow-500 dark:text-yellow-400">▸</span> Currently mastering DBMS and database optimization techniques</div>
-                  <div><span className="text-cyan-500 dark:text-cyan-400">▸</span> Building innovative full-stack applications with modern web technologies</div>
-                  <div><span className="text-pink-500 dark:text-pink-400">▸</span> Passionate about creating efficient, maintainable, and scalable solutions</div>
-                  <div><span className="text-orange-500 dark:text-orange-400">▸</span> Constantly exploring new technologies and development methodologies</div>
+
+              <div className="bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 rounded-2xl p-6 text-sm shadow-sm">
+                <div className="space-y-3 text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p>
+                    I'm a Full Stack Developer with deep experience across the
+                    <span className="text-gray-900 dark:text-white font-semibold"> MERN stack </span>
+                    and
+                    <span className="text-gray-900 dark:text-white font-semibold"> Java Full Stack </span>
+                    development using Spring Boot.
+                  </p>
+                  <p>
+                    I focus on building scalable, well-architected applications — from clean React
+                    frontends to robust REST APIs and reliable database design. I care about clean
+                    architecture, performance, and software engineering fundamentals.
+                  </p>
+                  <p>
+                    I've solved <span className="text-gray-900 dark:text-white font-semibold">400+ problems on LeetCode</span>,
+                    graduated with a <span className="text-gray-900 dark:text-white font-semibold">CGPA of 8.5</span>,
+                    and continue to invest in DSA, system design, and production-grade engineering.
+                  </p>
                 </div>
               </div>
             </div>
