@@ -17,6 +17,7 @@ const SkillsSection: React.FC = () => {
       { name: 'Express.js', icon: '🚀', level: 85, achievement: 'API Development', color: 'from-gray-400 to-gray-600' },
       { name: 'MongoDB', icon: '🗄️', level: 82, achievement: 'Database Design', color: 'from-green-500 to-green-700' },
       { name: 'MySQL', icon: '🗃️', level: 80, achievement: 'Query Optimization', color: 'from-blue-500 to-blue-700' },
+      { name: 'Java Full Stack', icon: '☕', level: 82, achievement: 'Internship Experience', color: 'from-orange-400 to-red-600' },
     ],
     'Programming': [
       { name: 'Java', icon: '☕', level: 93, achievement: 'LeetCode Expert', color: 'from-orange-400 to-red-600' },
