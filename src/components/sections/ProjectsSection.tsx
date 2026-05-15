@@ -6,6 +6,18 @@ import { Github, ExternalLink, Code, Database, Smartphone } from 'lucide-react';
 const ProjectsSection: React.FC = () => {
   const projects = [
     {
+      title: 'Vendor Management System',
+      description: 'Enterprise-grade vendor management application built with Spring Boot and a RESTful backend architecture. Handles vendor records, MySQL persistence, and clean layered architecture for real-world scalability.',
+      technologies: ['Java', 'Spring Boot', 'REST API', 'MySQL', 'JPA'],
+      github: 'https://github.com/perumal-hacker/Vendor-Management',
+      demo: null,
+      gradient: 'from-orange-500 to-red-600',
+      image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=800&h=400',
+      category: 'Java Full Stack',
+      highlights: ['Spring Boot', 'REST APIs', 'MySQL', 'Enterprise Architecture'],
+      featured: true,
+    },
+    {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with JWT authentication, payment integration, and comprehensive admin dashboard. Features 50+ product listings and dynamic shopping cart.',
       technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Stripe API'],
