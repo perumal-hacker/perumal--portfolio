@@ -182,6 +182,8 @@ const HeroSection: React.FC = () => {
                   2000,
                   'MERN Stack Specialist',
                   2000,
+                  'Java Full Stack Developer',
+                  2000,
                   'DSA Expert',
                   2000,
                   'Problem Solver',
